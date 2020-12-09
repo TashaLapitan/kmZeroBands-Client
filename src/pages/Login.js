@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withAuth } from './../context/auth-context';
+// import authService from './../lib/auth-service';
 
 class Login extends Component {
   state = { 
@@ -10,9 +11,10 @@ class Login extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     const { email, password } = this.state;
-    // Call funciton coming from AuthProvider ( via withAuth )
+    
     console.log('SUBMIT SUCCESSFUL: ', email, password)
     this.props.login(email, password);
+    // authService.login(email, password);
   };
 
   handleChange = event => {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { withAuth } from './../context/auth-context';
-// import authService from './../lib/auth-service';
 
 class Login extends Component {
   state = { 
@@ -11,10 +11,7 @@ class Login extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     const { email, password } = this.state;
-    
-    console.log('SUBMIT SUCCESSFUL: ', email, password)
     this.props.login(email, password);
-    // authService.login(email, password);
   };
 
   handleChange = event => {
@@ -39,6 +36,8 @@ class Login extends Component {
 
           <input type="submit" value="Login" />
         </form>
+        <p>Don't have an account yet?</p>
+        <Link to={"/signup"}>Create account</Link>
       </div>
     );
   }

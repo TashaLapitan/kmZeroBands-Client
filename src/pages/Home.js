@@ -3,7 +3,15 @@ import React from 'react'
 function Home() {
   return (
     <div> 
-      <h1>Home Page</h1>
+      <main>
+        <section>Search component</section>
+        <section>Link to the PostGigPage</section>
+      </main>
+      <section>
+        Map through GigAd components + show more gigs button
+      </section>
+      <article>little article + link to publish band/login</article>
+      <aside>FAQ link</aside>
     </div>
   )
 }

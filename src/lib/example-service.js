@@ -5,8 +5,7 @@ import axios from "axios";
 // TO CREATE A SERVICE FOR YOUR AXIOS CALLS
 class ExampleService {
   constructor() {
-    // this.api  is a reusable base of the request containing the base url (baseURL) 
-    // of the API and the options ( `withCredentials: true` )
+    
     this.api = axios.create({        
       baseURL: "http://localhost:5000/api",
       withCredentials: true
@@ -39,7 +38,6 @@ class ExampleService {
 
 }
 
-// Create instance (object) containing all axios calls as methods
 const exampleService = new ExampleService();
 
 export default exampleService;

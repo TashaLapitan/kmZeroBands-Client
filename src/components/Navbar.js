@@ -26,10 +26,10 @@ class Navbar extends Component {
           <>
           <div>
             <Link to="/login">
-              <button className="navbar-button">Login</button>{' '}
+              <button className="navbar-button">Login</button>
             </Link>
             <Link to="/signup">
-              <button className="navbar-button">Signup</button>{' '}
+              <button className="navbar-button">Signup</button>
             </Link>
           </div>
           </>

@@ -22,10 +22,10 @@ class AuthProvider extends React.Component {
       });
   }
 
-  signup = (username, password) => {
+  signup = (username, email, password) => {
     axios.post(
       'http://localhost:5000/auth/signup', 
-      { username, password }, 
+      { username, email, password }, 
       { withCredentials: true }
     )
     .then((response) => {
@@ -37,10 +37,10 @@ class AuthProvider extends React.Component {
     })
   }
 
-  login = (username, password) => {
+  login = (email, password) => {
     axios.post(
       'http://localhost:5000/auth/login', 
-      { username, password }, 
+      { email, password }, 
       { withCredentials: true }
     )
     .then((response) => {

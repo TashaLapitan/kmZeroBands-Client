@@ -10,12 +10,13 @@ class Navbar extends Component {
         <Link to={'/'} id='home-btn'>
           <h4>Logoimage</h4>
         </Link>
-        {this.props.isLoggedIn ? (
+        {this.props.isLoggedIn 
+        ? (
           <>
           <div>
               {this.props.user.image 
-              ? <img src={this.props.user.image} alt=""/>
-              : <img src="/images/profile-image-placeholder.png" alt=""/>}
+              ? <Link to={'/my-profile'}><img src={this.props.user.image} alt=""/></Link>
+              : <Link to={'/my-profile'}><img src="/images/profile-image-placeholder.png" alt=""/></Link>}
           </div>
             
             <Link onClick={this.props.logout} to="/">

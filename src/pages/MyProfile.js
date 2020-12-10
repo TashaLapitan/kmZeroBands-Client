@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { withAuth } from './../context/auth-context';
+import { Link } from "react-router-dom";
 import userService from './../lib/user-service';
+import ProfileInfo from './../components/ProfileInfo';
+import EditProfile from './../components/EditProfile';
 
 class MyProfile extends Component {
 
@@ -13,22 +16,27 @@ class MyProfile extends Component {
     editProfile: false
   }
 
-  toggleEdit = () => {
+  toggleEditProfile = () => {
     this.setState({editProfile: !this.state.editProfile})
   }
 
-  handleFormSubmit = event => {
+  handleProfileFormSubmit = event => {
     const id = this.props.user._id;
     event.preventDefault();
     const { username, image, dateOfBirth, phoneNumber, aboutBio } = this.state;
     userService.editUser(id, username, image, dateOfBirth, phoneNumber, aboutBio);
-    this.toggleEdit();
+    this.toggleEditProfile();
   };
 
   handleChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
+
+  deleteProfile = () => {
+    const id = this.props.user._id;
+    userService.deleteUser(id);
+  }
 
   componentDidMount () {
     const {username, image, dateOfBirth, phoneNumber, aboutBio} = this.props.user;
@@ -48,71 +56,18 @@ class MyProfile extends Component {
           <div>
               {!this.state.editProfile 
               ? <div>
-                  <table>
-                  <thead>
-                    <tr>
-                      <th>
-                        <h2>My Profile Info</h2>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        Username
-                      </td>
-                      <td>
-                        {this.state.username}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        Date of birth
-                      </td>
-                      <td>
-                        {this.state.dateOfBirth}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        Phone number
-                      </td>
-                      <td>
-                        {this.state.phoneNumber}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        About me
-                      </td>
-                      <td>
-                        {this.state.aboutBio}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <button onClick={this.toggleEdit}>Edit Profile</button>
+                  <ProfileInfo user={this.state}/>
+                <button onClick={this.toggleEditProfile}>Edit Profile</button>
               </div>
               : 
-                <form onSubmit={this.handleFormSubmit}>
-                  <h2>My Profile Info</h2>
-                  <label>Username</label>
-                  <input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
-                  <label>Date of birth</label>
-                  <input type="text" name="dateOfBirth" value={this.state.dateOfBirth} onChange={this.handleChange}/>
-                  <label>Phone number</label>
-                  <input type="text" name="phoneNumber" value={this.state.phoneNumber} onChange={this.handleChange}/>
-                  <label>About me</label>
-                  <input type="texarea" rows="4" cols="50" name="aboutBio" value={this.state.aboutBio} placeholder="More info about you" onChange={this.handleChange}/>
-                  <input type="submit" value="Update Info"/>
-                  </form>
+              <EditProfile user={this.state} handleProfileFormSubmit={this.handleProfileFormSubmit} handleChange={this.handleChange}/>
               }
           </div>
         </main>
         <section>
           <h2>My bands</h2>
           {this.props.user.isBandPOC
-          ? <div>Band profile card with link to band page</div>
+          ? <div>Band component with option to edit on the same page </div>
           : <div>
               <p>You haven't published a band yet</p>
               {/* will be link */}
@@ -120,7 +75,9 @@ class MyProfile extends Component {
             </div>}
         </section>
         
-
+        <aside>
+          <Link to={'/'} onClick={this.deleteProfile}>Delete Profile</Link>
+        </aside>
       </div>
     );
   }

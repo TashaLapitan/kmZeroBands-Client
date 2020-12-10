@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { withAuth } from './../context/auth-context';
 import { Link } from "react-router-dom";
+import axios from 'axios';
 import userService from './../lib/user-service';
 import ProfileInfo from './../components/ProfileInfo';
 import EditProfile from './../components/EditProfile';
+
 
 class MyProfile extends Component {
 
@@ -33,6 +35,24 @@ class MyProfile extends Component {
     this.setState({ [name]: value });
   };
 
+  handleFileUpload = event => {
+    const file = event.target.files[0];
+    console.log('FILE', file)
+    const uploadData = new FormData();
+    uploadData.append("image", file);
+    axios
+      .post('http://localhost:5000/api/user/upload', uploadData, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log("response is: ", response);
+        this.setState({ image: response.data.secure_url });
+      })
+      .catch((err) => {
+        console.log("Error while uploading the file: ", err);
+      });
+  };
+
   deleteProfile = () => {
     const id = this.props.user._id;
     userService.deleteUser(id);
@@ -60,7 +80,7 @@ class MyProfile extends Component {
                 <button onClick={this.toggleEditProfile}>Edit Profile</button>
               </div>
               : 
-              <EditProfile user={this.state} handleProfileFormSubmit={this.handleProfileFormSubmit} handleChange={this.handleChange}/>
+              <EditProfile user={this.state} handleProfileFormSubmit={this.handleProfileFormSubmit} handleChange={this.handleChange} handleFileUpload={this.handleFileUpload}/>
               }
           </div>
         </main>

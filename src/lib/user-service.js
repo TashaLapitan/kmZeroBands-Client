@@ -12,7 +12,6 @@ class UserService {
 
   getUser = (id) => {
     const pr = this.api.get(`/user/${id}`)
-
     return pr;
   }
 

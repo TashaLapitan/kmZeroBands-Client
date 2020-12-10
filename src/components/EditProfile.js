@@ -2,24 +2,10 @@ import React, {Component} from 'react';
 
 class EditProfile extends Component {
 
-        constructor (props) {
-            super(props);
-            this.state = {
-                username: "",
-                dateOfBirth: "",
-                phoneNumber: "",
-                aboutBio: "",
-                image: ""
-            } 
-        }
-
-        componentDidMount() {
-
-        }
 
         render () {
             const {handleChange, handleFileUpload, handleProfileFormSubmit} = this.props;
-            const {username, dateOfBirth, phoneNumber, aboutBio, image} = this.state;
+            const {username, dateOfBirth, phoneNumber, aboutBio} = this.props.user;
 
             return (
                 <form onSubmit={handleProfileFormSubmit}>

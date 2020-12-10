@@ -27,6 +27,8 @@ class MyProfile extends Component {
     event.preventDefault();
     const { username, image, dateOfBirth, phoneNumber, aboutBio } = this.state;
     userService.editUser(id, username, image, dateOfBirth, phoneNumber, aboutBio);
+    userService.updateCurrentUser(id);
+    this.setState({username, image, dateOfBirth, phoneNumber, aboutBio})
     this.toggleEditProfile();
   };
 
@@ -37,7 +39,6 @@ class MyProfile extends Component {
 
   handleFileUpload = event => {
     const file = event.target.files[0];
-    console.log('FILE', file)
     const uploadData = new FormData();
     uploadData.append("image", file);
     axios

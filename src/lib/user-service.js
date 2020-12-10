@@ -20,6 +20,11 @@ class UserService {
     return pr;
   }
 
+  updateCurrentUser = (id) => {
+    const pr = this.api.get(`/user/update/${id}`)
+    return pr;
+  }
+
   deleteUser = (id) => {
     const pr = this.api.delete(`/user/${id}` )
     return pr;

@@ -6,7 +6,7 @@ function GigCard(props) {
 
     const {title, description, genre, durationHours, pricePerHour} = props.gig;
     const user = props.gig.clientID;
-    
+
     return (
         <div>
             <h2>{title}</h2>
@@ -16,6 +16,7 @@ function GigCard(props) {
                 <li>{genre}</li>
             </ul>
             <p>{description}</p>
+            <p>Posted by: {user.username}</p>
         </div>
     )
 }

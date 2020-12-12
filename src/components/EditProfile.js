@@ -1,33 +1,29 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class EditProfile extends Component {
+function EditProfile (props) {
 
-
-        render () {
-            const {handleChange, handleFileUpload, handleProfileFormSubmit} = this.props;
-            const {username, dateOfBirth, phoneNumber, aboutBio} = this.props.user;
+            const {handleChange, handleFileUpload, handleProfileFormSubmit} = props;
+            const {username, dateOfBirth, phoneNumber, aboutBio} = props.user;
 
             return (
-                <form onSubmit={handleProfileFormSubmit}>
+                <form onSubmit={(e) => handleProfileFormSubmit(e)}>
                     <h2>My Profile Info</h2>
                     <label>Profile image</label>
                         <input
-                            // name="image"
                             type="file"
                             onChange={(e)=> handleFileUpload(e)}
                         ></input>
                     <label>Username</label>
-                    <input type="text" name="username" value={username} onChange={handleChange}/>
+                    <input type="text" name="username" value={username} onChange={(e) => handleChange(e)}/>
                     <label>Date of birth</label>
-                    <input type="text" name="dateOfBirth" value={dateOfBirth} onChange={handleChange}/>
+                    <input type="text" name="dateOfBirth" value={dateOfBirth} onChange={(e) => handleChange(e)}/>
                     <label>Phone number</label>
-                    <input type="text" name="phoneNumber" value={phoneNumber} onChange={handleChange}/>
+                    <input type="text" name="phoneNumber" value={phoneNumber} onChange={(e) => handleChange(e)}/>
                     <label>About me</label>
-                    <input type="texarea" rows="4" cols="50" name="aboutBio" value={aboutBio} placeholder="More info about you" onChange={handleChange}/>
+                    <textarea rows="4" cols="50" name="aboutBio" value={aboutBio} placeholder="More info about you" onChange={(e) => handleChange(e)}/>
                     <input type="submit" value="Update Info"/>
                 </form>
             )
-        }
     }
 
 export default EditProfile;

@@ -1,9 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 
-class ProfileInfo extends Component {
+function ProfileInfo (props) {
 
-
-    render () {
         return (
             <table>
             <thead>
@@ -16,23 +14,23 @@ class ProfileInfo extends Component {
             <tbody>
                 <tr>
                     <td>Username</td>
-                    <td>{this.props.user.username}</td>
+                    <td>{props.user.username}</td>
                 </tr>
                 <tr>
                     <td>Date of birth</td>
-                    <td>{this.props.user.dateOfBirth}</td>
+                    <td>{props.user.dateOfBirth}</td>
                 </tr>
                 <tr>
                     <td>Phone number</td>
-                    <td>{this.props.user.phoneNumber}</td>
+                    <td>{props.user.phoneNumber}</td>
                 </tr>
                 <tr>
                     <td>About me</td>
-                    <td>{this.props.user.aboutBio}</td>
+                    <td>{props.user.aboutBio}</td>
                 </tr>
             </tbody>
         </table>
-        )}
+        )
 }
 
 export default ProfileInfo;

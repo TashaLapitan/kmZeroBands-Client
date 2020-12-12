@@ -15,13 +15,9 @@ class UserService {
     return pr;
   }
 
-  editUser = (id, username, image, dateOfBirth, phoneNumber, aboutBio) => {
-    const pr = this.api.put(`/user/${id}`, {username, image, dateOfBirth, phoneNumber, aboutBio})
-    return pr;
-  }
-
-  updateCurrentUser = (id) => {
-    const pr = this.api.get(`/user/update/${id}`)
+  editUser = (username, image, dateOfBirth, phoneNumber, aboutBio) => {
+    // console.log('IMAGE RECEIVED IN THE USER SERVICE BEFORE PUT REQUEST: ', image)
+    const pr = this.api.put(`/user`, {username, image, dateOfBirth, phoneNumber, aboutBio})
     return pr;
   }
 

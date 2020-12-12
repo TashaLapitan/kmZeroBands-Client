@@ -3,19 +3,42 @@ import { withAuth } from './../context/auth-context';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import userService from './../lib/user-service';
+import bandService from './../lib/bands-service';
+
 import ProfileInfo from './../components/ProfileInfo';
 import EditProfile from './../components/EditProfile';
-
+import AddBand from './../components/AddBand';
 
 class MyProfile extends Component {
 
   state = {
-    username: "",
-    image: "",
-    dateOfBirth: "",
-    phoneNumber: [],
-    aboutBio: "",
-    editProfile: false
+    user: {
+      username: "",
+      image: "",
+      dateOfBirth: "",
+      phoneNumber: "",
+      aboutBio: "",
+      isBandPOC: undefined
+    },
+    band: {
+      title: "",
+      description: "",
+      phoneNumber: "",
+      contactInfo: "",
+      genre1: "",
+      genre2: "",
+      genre3: "",
+      genres: [],
+      image: "",
+      instagramUrl: "",
+      youtubeUrl: "",
+      pricePerHour: undefined,
+      canCustomizePlaylist: undefined,
+      minNoticePeriod: undefined,
+      pocID: undefined
+    },
+    editProfile: false,
+    showAddBand: false
   }
 
   toggleEditProfile = () => {
@@ -23,18 +46,36 @@ class MyProfile extends Component {
   }
 
   handleProfileFormSubmit = event => {
-    const id = this.props.user._id;
     event.preventDefault();
-    const { username, image, dateOfBirth, phoneNumber, aboutBio } = this.state;
-    userService.editUser(id, username, image, dateOfBirth, phoneNumber, aboutBio);
-    userService.updateCurrentUser(id);
-    this.setState({username, image, dateOfBirth, phoneNumber, aboutBio})
-    this.toggleEditProfile();
+    const { username, image, dateOfBirth, phoneNumber, aboutBio } = this.state.user;
+    userService.editUser(username, image, dateOfBirth, phoneNumber, aboutBio)
+      .then(() => {
+        this.toggleEditProfile();
+      })    
   };
+
+  handleBandFormSubmit = event => {
+    event.preventDefault();
+    console.log('STATE AFTER SUBMITTING THE BAND FORM ', this.state)
+    const {title, description, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod} = this.state.band;
+    bandService.createBand(title, description, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod)
+    //THEN WHAT TASHA
+    //returns promise
+      .then((createdBand) => {
+        this.setState({band: createdBand})
+        this.showAddBand();
+      })
+    }
 
   handleChange = event => {
     const { name, value } = event.target;
-    this.setState({ [name]: value });
+    this.setState({ user: {...this.state.user,[name]: value} });
+  };
+
+  handleBandChange = event => {
+    const { name, value } = event.target;
+    this.setState({ band: {...this.state.band, [name]: value}});
+    // console.log('band change: ', this.state.band.title, this.state.band.description, this.state.band.phoneNumber)
   };
 
   handleFileUpload = event => {
@@ -47,7 +88,8 @@ class MyProfile extends Component {
       })
       .then((response) => {
         console.log("response is: ", response);
-        this.setState({ image: response.data.secure_url });
+        this.setState({ user: {...this.state.user, image: response.data.secure_url }});
+        // console.log('IMAGE IN STATE AFTER SET STATE BEFORE EDIT PROFILE: ', this.state.user.image)
       })
       .catch((err) => {
         console.log("Error while uploading the file: ", err);
@@ -59,40 +101,52 @@ class MyProfile extends Component {
     userService.deleteUser(id);
   }
 
+  showAddBand = () => {
+    this.setState({showAddBand: !this.state.showAddBand});
+  }
+
+  setUserState = () => {
+    userService.getUser(this.props.user._id)
+    .then((response) => {
+      const {username, image, dateOfBirth, phoneNumber, aboutBio} = response.data
+      this.setState({user: {username, image, dateOfBirth, phoneNumber, aboutBio}})
+    })
+  }
+
   componentDidMount () {
-    const {username, image, dateOfBirth, phoneNumber, aboutBio} = this.props.user;
-    this.setState({username, image, dateOfBirth, phoneNumber, aboutBio});
+    this.setUserState();
   }
   
   render() {
     return (
       <div>
-        <h1>{this.props.user && this.props.user.username}</h1>
+        <h1>{this.state.user && this.state.user.username}</h1>
         <main>
           <div>
-              {this.props.user.image 
-              ? <img src={this.props.user.image} alt=""/>
+              {this.state.user.image 
+              ? <img src={this.state.user.image} alt=""/>
               : <img src="/images/profile-image-placeholder.png" alt=""/>}
           </div>
           <div>
               {!this.state.editProfile 
               ? <div>
-                  <ProfileInfo user={this.state}/>
+                  <ProfileInfo user={this.state.user}/>
                 <button onClick={this.toggleEditProfile}>Edit Profile</button>
               </div>
               : 
-              <EditProfile user={this.state} handleProfileFormSubmit={this.handleProfileFormSubmit} handleChange={this.handleChange} handleFileUpload={this.handleFileUpload}/>
+              <EditProfile user={this.state.user} handleProfileFormSubmit={this.handleProfileFormSubmit} handleChange={this.handleChange} handleFileUpload={this.handleFileUpload}/>
               }
           </div>
         </main>
         <section>
-          <h2>My bands</h2>
-          {this.props.user.isBandPOC
-          ? <div>Band component with option to edit on the same page </div>
+          <h2>My band</h2>
+          {this.state.user.isBandPOC
+          ? <div>BAND DETAILS</div>
           : <div>
               <p>You haven't published a band yet</p>
-              {/* will be link */}
-              <button>Add a band</button>
+              {this.state.showAddBand 
+              ? <AddBand user={this.state.user} showAddBand={this.showAddBand} handleBandFormSubmit={this.handleBandFormSubmit} handleBandChange={this.handleBandChange}></AddBand> 
+              : <button onClick={this.showAddBand}>Add a band</button>}
             </div>}
         </section>
         

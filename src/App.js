@@ -7,6 +7,9 @@ import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import MyProfile from './pages/MyProfile';
+// import BandPage from './pages/BandPage';
+
+// import bandService from './lib/bands-service';
 
 import AnonRoute from './components/AnonRoute';
 import PrivateRoute from './components/PrivateRoute';
@@ -14,6 +17,11 @@ import PrivateRoute from './components/PrivateRoute';
 
 
 class App extends Component {
+
+  state = {
+    bands: []
+  }
+
   render() {
     return (
       <div className="container">
@@ -21,7 +29,7 @@ class App extends Component {
 
         <Switch>
           <Route exact path="/" component={Home} />
-
+          {/* <Route exact path="/band/:id" component={BandPage}/> */}
 
           <AnonRoute exact path="/signup" component={Signup} />
           <AnonRoute exact path="/login" component={Login} />

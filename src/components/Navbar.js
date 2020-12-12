@@ -1,10 +1,29 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withAuth } from './../context/auth-context';
+import userService from './../lib/user-service';
 
 class Navbar extends Component {
+
+  state = {
+    user: {}
+  }
+
+  setUserState = () => {
+    if (this.props.isLoggedIn) {
+      userService.getUser(this.props.user._id)
+      .then((currentUser) => {
+        this.setState({user: currentUser.data});
+      })
+    }
+  }
+
+  componentDidMount () {
+    this.setUserState();
+  }
+
   render() {
-    // const { user, logout, isLoggedin } = this.props;
+
     return (
       <nav className="navbar">
         <Link to={'/'} id='home-btn'>
@@ -14,8 +33,8 @@ class Navbar extends Component {
         ? (
           <>
           <div>
-              {this.props.user.image 
-              ? <Link to={'/my-profile'}><img src={this.props.user.image} alt=""/></Link>
+              {this.state.user.image 
+              ? <Link to={'/my-profile'}><img src={this.state.user.image} alt=""/></Link>
               : <Link to={'/my-profile'}><img src="/images/profile-image-placeholder.png" alt=""/></Link>}
           </div>
             

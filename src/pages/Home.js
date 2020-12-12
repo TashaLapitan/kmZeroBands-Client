@@ -1,16 +1,33 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import PostNewGig from './../components/PostNewGig';
 import { withAuth } from './../context/auth-context';
+
+import gigService from './../lib/gig-service';
+
+import PostNewGig from './../components/PostNewGig';
+import GigCard from './../components/GigCard';
 
 class Home extends Component {
 
   state = {
-    showAddGig: false
+    showAddGig: false,
+    gigsArr: []
   }
 
   toggleAddGig = () => {
     this.setState({showAddGig: !this.state.showAddGig});
+  }
+
+  getGigs = () => {
+    gigService.getAllGigs()
+      .then((response) => {
+        this.setState({gigsArr: response.data})
+        console.log('this.state.gigsArr', this.state.gigsArr)
+      })
+  }
+
+  componentDidMount () {
+    this.getGigs();
   }
 
   render() {
@@ -26,7 +43,7 @@ class Home extends Component {
             : this.props.isLoggedIn && !this.state.showAddGig
               ? <div>
                   <p>Didn't find what you were looking for? No worries, publish your own gig and receive offers from your local musicians!</p>
-                  <button onClick={this.toggleAddGig}>wrong button if logged out</button>
+                  <button onClick={this.toggleAddGig}>Post a gig</button>
                 </div>
               :  <div>
                     <p>Didn't find what you were looking for? No worries, publish your own gig and receive offers from your local musicians!</p>
@@ -34,7 +51,9 @@ class Home extends Component {
                   </div>}
          </main>
          <section>
-           Map through GigAd components + show more gigs button
+           {this.state.gigsArr.map(gig => {
+             return (<GigCard key={gig._id} gig={gig}/>)
+           })}
          </section>
          <article>little article + link to publish band/login</article>
          <aside>FAQ link</aside>

@@ -37,6 +37,7 @@ class MyProfile extends Component {
         minNoticePeriod: undefined,
         pocID: undefined
       },
+      gigHistory: []
     },
     editProfile: false,
     updateBand: false,
@@ -142,15 +143,16 @@ class MyProfile extends Component {
   setComponentState = () => {
     userService.getUser(this.props.user._id)
     .then((response) => {
-      const {username, image, dateOfBirth, phoneNumber, aboutBio, isBandPOC, band} = response.data;
+      const {username, image, dateOfBirth, phoneNumber, aboutBio, isBandPOC, band, gigHistory} = response.data;
       if (!band) {
-        this.setState({user: {...this.state.user, username, image, dateOfBirth, phoneNumber, aboutBio, isBandPOC}});
+        this.setState({user: {...this.state.user, username, image, dateOfBirth, phoneNumber, aboutBio, isBandPOC, gigHistory}});
       } else {
         band.genre1 = band.genres[0];
         band.genre2 = band.genres[1];
         band.genre3 = band.genres[2];
-        this.setState({user: {username, image, dateOfBirth, phoneNumber, aboutBio, isBandPOC, band}});
+        this.setState({user: {username, image, dateOfBirth, phoneNumber, aboutBio, isBandPOC, band, gigHistory}});
       }
+      console.log('this.state.user', this.state.user)
     })
   }
 
@@ -200,7 +202,7 @@ class MyProfile extends Component {
         </section>
         
         <aside>
-          <Link to={'/'} onClick={this.deleteProfile}>Delete Profile</Link>
+          {/* <Link to={'/'} onClick={this.deleteProfile}>Delete Profile</Link> */}
         </aside>
       </div>
     );

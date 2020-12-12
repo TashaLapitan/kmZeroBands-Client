@@ -19,7 +19,6 @@ class GigService {
         return pr
     }
   
-    // req.body title, description, durationHours, date, genres, pricePerHour
     createGig = (title, description, date, genre, durationHours, pricePerHour) => {
       const pr = this.api.post('/gigs', {title, description, date, genre, durationHours, pricePerHour})
       return pr

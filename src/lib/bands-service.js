@@ -22,9 +22,7 @@ class BandService {
 
   createBand = (title, description, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod) => {
     const genres = [genre1, genre2, genre3];
-    console.log('BAND SERVICE L25 PARAMS SENT TO BANCKEND: ', {title, description, genres, phoneNumber, contactInfo, instagramUrl, youtubeUrl, pricePerHour, canCustomizePlaylist, minNoticePeriod})
-
-    //doesn't pass model validation
+    console.log('SENDING BAND PARAMS TO BACKEND: ', {title, description, genres, phoneNumber, contactInfo, instagramUrl, youtubeUrl, pricePerHour, canCustomizePlaylist, minNoticePeriod})
     const pr = this.api.post('/bands', {title, description, genres, phoneNumber, contactInfo, instagramUrl, youtubeUrl, pricePerHour, canCustomizePlaylist, minNoticePeriod})
     return pr
   }

@@ -18,24 +18,24 @@ class MyProfile extends Component {
       dateOfBirth: "",
       phoneNumber: "",
       aboutBio: "",
-      isBandPOC: undefined
-    },
-    band: {
-      title: "",
-      description: "",
-      phoneNumber: "",
-      contactInfo: "",
-      genre1: "",
-      genre2: "",
-      genre3: "",
-      genres: [],
-      image: "",
-      instagramUrl: "",
-      youtubeUrl: "",
-      pricePerHour: undefined,
-      canCustomizePlaylist: undefined,
-      minNoticePeriod: undefined,
-      pocID: undefined
+      isBandPOC: false,
+      band: {
+        title: "",
+        description: "",
+        phoneNumber: "",
+        contactInfo: "",
+        genre1: "",
+        genre2: "",
+        genre3: "",
+        genres: [],
+        image: "",
+        instagramUrl: "",
+        youtubeUrl: "",
+        pricePerHour: undefined,
+        canCustomizePlaylist: undefined,
+        minNoticePeriod: undefined,
+        pocID: undefined
+      },
     },
     editProfile: false,
     showAddBand: false
@@ -56,16 +56,13 @@ class MyProfile extends Component {
 
   handleBandFormSubmit = event => {
     event.preventDefault();
-    console.log('STATE AFTER SUBMITTING THE BAND FORM ', this.state)
-    const {title, description, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod} = this.state.band;
+    const {title, description, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod} = this.state.user.band;
     bandService.createBand(title, description, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod)
-    //THEN WHAT TASHA
-    //returns promise
-      .then((createdBand) => {
-        this.setState({band: createdBand})
+      .then(() => {
         this.showAddBand();
+        this.setComponentState();
       })
-    }
+  };
 
   handleChange = event => {
     const { name, value } = event.target;
@@ -74,8 +71,7 @@ class MyProfile extends Component {
 
   handleBandChange = event => {
     const { name, value } = event.target;
-    this.setState({ band: {...this.state.band, [name]: value}});
-    // console.log('band change: ', this.state.band.title, this.state.band.description, this.state.band.phoneNumber)
+    this.setState({ user: {...this.state.user, band: {...this.state.user.band, [name]: value}}});
   };
 
   handleFileUpload = event => {
@@ -105,16 +101,17 @@ class MyProfile extends Component {
     this.setState({showAddBand: !this.state.showAddBand});
   }
 
-  setUserState = () => {
+  setComponentState = () => {
     userService.getUser(this.props.user._id)
     .then((response) => {
-      const {username, image, dateOfBirth, phoneNumber, aboutBio} = response.data
-      this.setState({user: {username, image, dateOfBirth, phoneNumber, aboutBio}})
+      const {username, image, dateOfBirth, phoneNumber, aboutBio, isBandPOC, band} = response.data;
+      this.setState({user: {username, image, dateOfBirth, phoneNumber, aboutBio, isBandPOC, band}});
+      console.log('IF THIS WORKS I`M HAVING A COFFEE: ', this.state)
     })
   }
 
   componentDidMount () {
-    this.setUserState();
+    this.setComponentState();
   }
   
   render() {

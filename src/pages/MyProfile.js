@@ -58,12 +58,22 @@ class MyProfile extends Component {
 
   handleBandFormSubmit = event => {
     event.preventDefault();
-    const {title, description, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod} = this.state.user.band;
-    bandService.createBand(title, description, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod)
+    const {title, description, image, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod} = this.state.user.band;
+
+    if (this.state.user.isBandPOC) {
+      const bandID = this.state.user.band._id;
+      bandService.updateBandInfo(bandID, title, description, image, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod)
       .then(() => {
         this.updateBand();
         this.setComponentState();
       })
+    } else {
+      bandService.createBand(title, description, image, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod)
+      .then(() => {
+        this.updateBand();
+        this.setComponentState();
+      })
+    }
   };
 
   handleChange = event => {
@@ -94,6 +104,24 @@ class MyProfile extends Component {
       });
   };
 
+  handleBandImgUpload = event => {
+    const file = event.target.files[0];
+    const uploadData = new FormData();
+    uploadData.append("image", file);
+    axios
+      .post('http://localhost:5000/api/bands/upload', uploadData, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log("response is: ", response);
+        this.setState({ user: {...this.state.user, band: {...this.state.user.band, image: response.data.secure_url} }});
+        // console.log('IMAGE IN STATE AFTER SET STATE BEFORE EDIT PROFILE: ', this.state.user.image)
+      })
+      .catch((err) => {
+        console.log("Error while uploading the file: ", err);
+      });
+  }
+
   deleteProfile = () => {
     const id = this.props.user._id;
     userService.deleteUser(id);
@@ -103,11 +131,19 @@ class MyProfile extends Component {
     this.setState({updateBand: !this.state.updateBand});
   }
 
+  deleteBand = () => {
+    const id = this.state.user.band._id;
+    bandService.deleteBand(id)
+     .then(() => {
+       this.setComponentState();
+     })
+  }
+
   setComponentState = () => {
     userService.getUser(this.props.user._id)
     .then((response) => {
       const {username, image, dateOfBirth, phoneNumber, aboutBio, isBandPOC, band} = response.data;
-      if (band === undefined) {
+      if (!band) {
         this.setState({user: {...this.state.user, username, image, dateOfBirth, phoneNumber, aboutBio, isBandPOC}});
       } else {
         band.genre1 = band.genres[0];
@@ -152,14 +188,13 @@ class MyProfile extends Component {
               <BandInfo band={this.state.user.band}/>
               <button onClick={this.updateBand}>Edit band</button>
               </div>
-              //refactor into update band:
-            : <UpdateBand band={this.state.user.band} updateBand={this.updateBand} handleBandFormSubmit={this.handleBandFormSubmit} handleBandChange={this.handleBandChange}></UpdateBand> 
+            : <UpdateBand band={this.state.user.band} updateBand={this.updateBand} handleBandImgUpload={this.handleBandImgUpload} handleBandFormSubmit={this.handleBandFormSubmit} handleBandChange={this.handleBandChange} deleteBand={this.deleteBand} bandExists={this.state.user.isBandPOC}></UpdateBand> 
           : !this.state.updateBand
             ? <div>
                 <p>You haven't published any bands yet</p>
                 <button onClick={this.updateBand}>Add a band</button>
               </div>
-            : <UpdateBand band={this.state.user.band} updateBand={this.updateBand} handleBandFormSubmit={this.handleBandFormSubmit} handleBandChange={this.handleBandChange}></UpdateBand> 
+            : <UpdateBand band={this.state.user.band} updateBand={this.updateBand} handleBandImgUpload={this.handleBandImgUpload} handleBandFormSubmit={this.handleBandFormSubmit} handleBandChange={this.handleBandChange}></UpdateBand> 
           }        
           </div>
         </section>

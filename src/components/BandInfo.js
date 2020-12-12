@@ -3,10 +3,11 @@ import {Link} from 'react-router-dom';
 
 function BandInfo(props) {
 
-    const {title, description, phoneNumber, contactInfo, genres, instagramUrl, youtubeUrl, pricePerHour, canCustomizePlaylist, minNoticePeriod } = props.band;
+    const {title, description, image, phoneNumber, contactInfo, genres, instagramUrl, youtubeUrl, pricePerHour, canCustomizePlaylist, minNoticePeriod } = props.band;
 
     return (
         <div>
+            <img src={image} alt=""/>
             <table>
                 <thead>
                     <tr>

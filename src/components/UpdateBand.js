@@ -1,12 +1,15 @@
 import React from 'react';
 
 function UpdateBand (props) {
-    const {handleBandChange, handleBandFormSubmit, updateBand} = props;
-    const {title, description, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, genres, pricePerHour, canCustomizePlaylist, minNoticePeriod} = props.band;
+    const {bandExists, handleBandChange, handleBandFormSubmit, updateBand, deleteBand, handleBandImgUpload} = props;
+    const {title, image, description, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod} = props.band;
     
     return (
         <div>
+            <img src={image} alt=""/>
             <form onSubmit={(e) => handleBandFormSubmit(e)}>
+                <label>Band Photo: </label>
+                <input type="file" onChange={(e)=> handleBandImgUpload(e)}></input> <br/>
                 <label>Title: </label> <br/>
                 <input type="text" name="title" value={title}onChange={handleBandChange}/> <br/>
                 <label>Description: </label> <br/>
@@ -43,6 +46,11 @@ function UpdateBand (props) {
                 <button type="submit">Publish</button>
             </form>
             <button onClick={updateBand}>Cancel</button>
+            {bandExists 
+            ? <button onClick={deleteBand}>Delete Band</button>
+            : null
+            }
+            
             
         </div>
     )

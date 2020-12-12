@@ -1,4 +1,5 @@
-import React from 'react'
+import {React} from 'react';
+import {Link} from 'react-router-dom';
 
 function BandInfo(props) {
 
@@ -10,7 +11,7 @@ function BandInfo(props) {
                 <thead>
                     <tr>
                         <th>
-                            <h2>{props.band.title}</h2>
+                            <h2>{title}</h2>
                         </th>
                     </tr>
                 </thead>
@@ -31,17 +32,9 @@ function BandInfo(props) {
                         <td>Genres</td>
                         <td>
                             {genres.map((genre,i) => {
-                                return <span key={i}>{genre}</span>
+                                return <span key={i}>{genre}, </span>
                             })}
                         </td>
-                    </tr>
-                    <tr>
-                        <td>Link to Instagram</td>
-                        <td>{instagramUrl}</td>
-                    </tr>
-                    <tr>
-                        <td>Link to YouTube</td>
-                        <td>{youtubeUrl}</td>
                     </tr>
                     <tr>
                         <td>Price per hour of performance</td>
@@ -54,7 +47,18 @@ function BandInfo(props) {
                     {canCustomizePlaylist 
                     ? <tr>
                         <td>Minimum rehersal time for a new song</td>
-                        <td>€{minNoticePeriod}</td>
+                        <td>{minNoticePeriod} days</td>
+                      </tr>
+                    : null
+                    }
+                    {instagramUrl || youtubeUrl
+                    ? <tr>
+                        {instagramUrl 
+                        ? <td><Link to={instagramUrl}><img src="/images/instagram-logo.png" width="30px" alt=""/></Link></td>
+                        : <td></td>}
+                        {youtubeUrl 
+                        ? <td><Link to={youtubeUrl}><img src="/images/youtube-logo.png" width="30px" alt=""/></Link></td>
+                        : <td></td>}                        
                       </tr>
                     : null
                     }

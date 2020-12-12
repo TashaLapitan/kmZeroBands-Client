@@ -6,7 +6,9 @@ import userService from './../lib/user-service';
 class Navbar extends Component {
 
   state = {
-    user: {}
+    user: {
+      image: ""
+    }
   }
 
   setUserState = () => {

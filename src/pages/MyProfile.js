@@ -7,7 +7,7 @@ import bandService from './../lib/bands-service';
 
 import ProfileInfo from './../components/ProfileInfo';
 import EditProfile from './../components/EditProfile';
-import AddBand from './../components/AddBand';
+import UpdateBand from './../components/UpdateBand';
 import BandInfo from './../components/BandInfo';
 
 class MyProfile extends Component {
@@ -39,7 +39,8 @@ class MyProfile extends Component {
       },
     },
     editProfile: false,
-    showAddBand: false
+    updateBand: false,
+    editBand: false
   }
 
   toggleEditProfile = () => {
@@ -60,7 +61,7 @@ class MyProfile extends Component {
     const {title, description, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod} = this.state.user.band;
     bandService.createBand(title, description, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod)
       .then(() => {
-        this.showAddBand();
+        this.updateBand();
         this.setComponentState();
       })
   };
@@ -98,15 +99,22 @@ class MyProfile extends Component {
     userService.deleteUser(id);
   }
 
-  showAddBand = () => {
-    this.setState({showAddBand: !this.state.showAddBand});
+  updateBand = () => {
+    this.setState({updateBand: !this.state.updateBand});
   }
 
   setComponentState = () => {
     userService.getUser(this.props.user._id)
     .then((response) => {
       const {username, image, dateOfBirth, phoneNumber, aboutBio, isBandPOC, band} = response.data;
-      this.setState({user: {username, image, dateOfBirth, phoneNumber, aboutBio, isBandPOC, band}});
+      if (band === undefined) {
+        this.setState({user: {...this.state.user, username, image, dateOfBirth, phoneNumber, aboutBio, isBandPOC}});
+      } else {
+        band.genre1 = band.genres[0];
+        band.genre2 = band.genres[1];
+        band.genre3 = band.genres[2];
+        this.setState({user: {username, image, dateOfBirth, phoneNumber, aboutBio, isBandPOC, band}});
+      }
     })
   }
 
@@ -137,14 +145,23 @@ class MyProfile extends Component {
         </main>
         <section>
           <h2>My band</h2>
-          {this.state.user.isBandPOC
-          ? <BandInfo band={this.state.user.band}/>
-          : <div>
-              <p>You haven't published a band yet</p>
-              {this.state.showAddBand 
-              ? <AddBand user={this.state.user} showAddBand={this.showAddBand} handleBandFormSubmit={this.handleBandFormSubmit} handleBandChange={this.handleBandChange}></AddBand> 
-              : <button onClick={this.showAddBand}>Add a band</button>}
-            </div>}
+          <div>
+          { this.state.user.isBandPOC 
+          ? !this.state.updateBand
+            ? <div>
+              <BandInfo band={this.state.user.band}/>
+              <button onClick={this.updateBand}>Edit band</button>
+              </div>
+              //refactor into update band:
+            : <UpdateBand band={this.state.user.band} updateBand={this.updateBand} handleBandFormSubmit={this.handleBandFormSubmit} handleBandChange={this.handleBandChange}></UpdateBand> 
+          : !this.state.updateBand
+            ? <div>
+                <p>You haven't published any bands yet</p>
+                <button onClick={this.updateBand}>Add a band</button>
+              </div>
+            : <UpdateBand band={this.state.user.band} updateBand={this.updateBand} handleBandFormSubmit={this.handleBandFormSubmit} handleBandChange={this.handleBandChange}></UpdateBand> 
+          }        
+          </div>
         </section>
         
         <aside>

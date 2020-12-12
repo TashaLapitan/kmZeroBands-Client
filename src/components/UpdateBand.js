@@ -2,7 +2,7 @@ import React from 'react';
 
 function UpdateBand (props) {
     const {bandExists, handleBandChange, handleBandFormSubmit, updateBand, deleteBand, handleBandImgUpload} = props;
-    const {title, image, description, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod} = props.band;
+    const {title, image, city, description, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod} = props.band;
     
     return (
         <div>
@@ -11,7 +11,9 @@ function UpdateBand (props) {
                 <label>Band Photo: </label>
                 <input type="file" onChange={(e)=> handleBandImgUpload(e)}></input> <br/>
                 <label>Title: </label> <br/>
-                <input type="text" name="title" value={title}onChange={handleBandChange}/> <br/>
+                <input type="text" name="title" value={title} onChange={handleBandChange}/> <br/>
+                <label>City: </label> <br/>
+                <input type="text" name="city" value={city} onChange={handleBandChange}/> <br/>
                 <label>Description: </label> <br/>
                 <textarea rows="4" cols="50" name="description" value={description} onChange={handleBandChange}></textarea> <br/>
                 <label>Phone Number: </label> <br/>
@@ -50,8 +52,6 @@ function UpdateBand (props) {
             ? <button onClick={deleteBand}>Delete Band</button>
             : null
             }
-            
-            
         </div>
     )
 }

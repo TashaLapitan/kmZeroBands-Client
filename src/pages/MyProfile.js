@@ -25,6 +25,7 @@ class MyProfile extends Component {
         description: "",
         phoneNumber: "",
         contactInfo: "",
+        city: "",
         genre1: "",
         genre2: "",
         genre3: "",
@@ -59,17 +60,17 @@ class MyProfile extends Component {
 
   handleBandFormSubmit = event => {
     event.preventDefault();
-    const {title, description, image, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod} = this.state.user.band;
+    const {title, description, image, city, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod} = this.state.user.band;
 
     if (this.state.user.isBandPOC) {
       const bandID = this.state.user.band._id;
-      bandService.updateBandInfo(bandID, title, description, image, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod)
+      bandService.updateBandInfo(bandID, title, description, city, image, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod)
       .then(() => {
         this.updateBand();
         this.setComponentState();
       })
     } else {
-      bandService.createBand(title, description, image, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod)
+      bandService.createBand(title, description, image, city, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod)
       .then(() => {
         this.updateBand();
         this.setComponentState();
@@ -136,6 +137,7 @@ class MyProfile extends Component {
     const id = this.state.user.band._id;
     bandService.deleteBand(id)
      .then(() => {
+       this.updateBand();
        this.setComponentState();
      })
   }

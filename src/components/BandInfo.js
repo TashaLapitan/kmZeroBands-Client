@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 function BandInfo(props) {
 
-    const {title, description, image, phoneNumber, contactInfo, genres, instagramUrl, youtubeUrl, pricePerHour, canCustomizePlaylist, minNoticePeriod } = props.band;
+    const {title, description, city, image, phoneNumber, contactInfo, genres, instagramUrl, youtubeUrl, pricePerHour, canCustomizePlaylist, minNoticePeriod } = props.band;
 
     return (
         <div>
@@ -17,6 +17,10 @@ function BandInfo(props) {
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td>City: </td>
+                        <td>{city}</td>
+                    </tr>
                     <tr>
                         <td>Description</td>
                         <td>{description}</td>

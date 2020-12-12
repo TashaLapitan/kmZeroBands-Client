@@ -19,8 +19,8 @@ class GigService {
         return pr
     }
   
-    createGig = (title, description, date, genre, durationHours, pricePerHour) => {
-      const pr = this.api.post('/gigs', {title, description, date, genre, durationHours, pricePerHour})
+    createGig = (title, description, date, city, genre, durationHours, pricePerHour) => {
+      const pr = this.api.post('/gigs', {title, description, date, city, genre, durationHours, pricePerHour})
       return pr
     }
   

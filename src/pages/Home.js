@@ -22,7 +22,6 @@ class Home extends Component {
     gigService.getAllGigs()
       .then((response) => {
         this.setState({gigsArr: response.data})
-        console.log('this.state.gigsArr', this.state.gigsArr)
       })
   }
 
@@ -37,7 +36,7 @@ class Home extends Component {
            <section>Search component</section>
           {this.props.isLoggedIn && this.state.showAddGig
             ? <div>
-                  <PostNewGig toggleAddGig={this.toggleAddGig}/>
+                  <PostNewGig toggleAddGig={this.toggleAddGig} getGigs={this.getGigs}/>
                   <button onClick={this.toggleAddGig}>Discard</button>
               </div>
             : this.props.isLoggedIn && !this.state.showAddGig

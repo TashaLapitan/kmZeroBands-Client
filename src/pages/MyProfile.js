@@ -8,6 +8,7 @@ import bandService from './../lib/bands-service';
 import ProfileInfo from './../components/ProfileInfo';
 import EditProfile from './../components/EditProfile';
 import AddBand from './../components/AddBand';
+import BandInfo from './../components/BandInfo';
 
 class MyProfile extends Component {
 
@@ -106,7 +107,6 @@ class MyProfile extends Component {
     .then((response) => {
       const {username, image, dateOfBirth, phoneNumber, aboutBio, isBandPOC, band} = response.data;
       this.setState({user: {username, image, dateOfBirth, phoneNumber, aboutBio, isBandPOC, band}});
-      console.log('IF THIS WORKS I`M HAVING A COFFEE: ', this.state)
     })
   }
 
@@ -138,7 +138,7 @@ class MyProfile extends Component {
         <section>
           <h2>My band</h2>
           {this.state.user.isBandPOC
-          ? <div>BAND DETAILS</div>
+          ? <BandInfo band={this.state.user.band}/>
           : <div>
               <p>You haven't published a band yet</p>
               {this.state.showAddBand 

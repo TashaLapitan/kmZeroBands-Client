@@ -13,6 +13,11 @@ class GigService {
       const pr = this.api.get('/gigs')
       return pr
     }
+
+    searchGigs = (city) => {
+        const pr = this.api.get(`/gigs/search/${city}`)
+        return pr
+    }
   
     getGigByID = (id) => {
         const pr = this.api.get(`/bands/${id}`)

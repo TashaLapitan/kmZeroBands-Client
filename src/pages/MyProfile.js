@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withAuth } from './../context/auth-context';
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import axios from 'axios';
 import userService from './../lib/user-service';
 import bandService from './../lib/bands-service';
@@ -154,7 +154,6 @@ class MyProfile extends Component {
         band.genre3 = band.genres[2];
         this.setState({user: {username, image, dateOfBirth, phoneNumber, aboutBio, isBandPOC, band, gigHistory}});
       }
-      console.log('this.state.user', this.state.user)
     })
   }
 

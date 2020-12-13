@@ -1,4 +1,5 @@
 import React from "react";
+import GigCard from './../components/GigCard';
 
 function ProfileInfo (props) {
 
@@ -37,17 +38,12 @@ function ProfileInfo (props) {
                     <h2>My pending gigs: </h2>
                     {gigArr
                     ? gigArr.map(gig => {
-                        if (gig.isPending) {
-                            return (
-                            <div key={gig._id}>
-                                <h5>{gig.title}</h5>
-                                <p>{gig.description}</p>
-                                <p>{gig.pricePerHour} eur</p>
-                                <p>{gig.durationHours}</p>
-                            </div>
-                        )
-                        }
-                    })
+                        const today = new Date(Date.now());
+                        const gigDate = new Date(gig.date);
+                        if (gigDate >= today) {
+                            return <GigCard key={gig._id} gig={gig}/>
+                        } 
+                        })
                     : <p>You haven't posted any gigs yet</p>}
                 </div>
             </section>

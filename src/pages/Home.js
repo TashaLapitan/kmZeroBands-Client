@@ -51,7 +51,11 @@ class Home extends Component {
          </main>
          <section>
            {this.state.gigsArr.map(gig => {
-             return (<GigCard key={gig._id} gig={gig}/>)
+             const today = new Date(Date.now());
+             const gigDate = new Date(gig.date);
+             if (gigDate >= today) {
+              return <GigCard key={gig._id} gig={gig}/>
+             }
            })}
          </section>
          <article>little article + link to publish band/login</article>

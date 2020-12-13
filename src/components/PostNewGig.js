@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+// import {Redirect} from 'react-router-dom';
 import gigService from '../lib/gig-service';
 
 class PostNewGig extends Component {
@@ -18,12 +19,17 @@ class PostNewGig extends Component {
         this.setState({[name]: value});
     }
 
+    // redirectToProfile = () => {
+    //     return <Redirect to="/my-profile"/>
+    // }
+
     handleGigSubmit = event => {
         event.preventDefault();
         const {title, description, date, city, genre, durationHours, pricePerHour} = this.state;
         gigService.createGig(title, description, date, city, genre, durationHours, pricePerHour)
             .then(() => {
                 this.props.toggleAddGig();
+                // this.redirectToProfile();
                 this.props.getGigs();
             })
     }
@@ -50,7 +56,7 @@ class PostNewGig extends Component {
                 <input type="number" min="0" name="durationHours" value={this.state.durationHours} onChange={(e) => this.handleInput(e)}/><span> hours</span> <br/>
                 <label>How much do you offer?</label> <br/>
                 <input type="number" min="0" name="pricePerHour" value={this.state.pricePerHour} onChange={(e) => this.handleInput(e)}/><span> € per hour</span> <br/>
-                <button type="submit">Post my gig!</button>
+                <button type="submit" onClick={(e) => this.handleGigSubmit(e)}>Post my gig!</button>
             </form>
         )
     }

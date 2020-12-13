@@ -3,7 +3,7 @@ import React from 'react';
 function EditProfile (props) {
 
             const {handleChange, handleFileUpload, handleProfileFormSubmit} = props;
-            const {username, dateOfBirth, phoneNumber, aboutBio} = props.user;
+            const {username, phoneNumber, aboutBio} = props.user;
 
             return (
                 <form onSubmit={(e) => handleProfileFormSubmit(e)}>

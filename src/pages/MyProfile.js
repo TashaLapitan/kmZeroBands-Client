@@ -16,7 +16,6 @@ class MyProfile extends Component {
     user: {
       username: "",
       image: "",
-      dateOfBirth: "",
       phoneNumber: "",
       aboutBio: "",
       isBandPOC: false,
@@ -51,8 +50,8 @@ class MyProfile extends Component {
 
   handleProfileFormSubmit = event => {
     event.preventDefault();
-    const { username, image, dateOfBirth, phoneNumber, aboutBio } = this.state.user;
-    userService.editUser(username, image, dateOfBirth, phoneNumber, aboutBio)
+    const { username, image, phoneNumber, aboutBio } = this.state.user;
+    userService.editUser(username, image, phoneNumber, aboutBio)
       .then(() => {
         this.toggleEditProfile();
       })    
@@ -169,14 +168,11 @@ class MyProfile extends Component {
           <div>
               {this.state.user.image 
               ? <img src={this.state.user.image} alt=""/>
-              : <img src="/images/profile-image-placeholder.png" alt=""/>}
+              : <img src="/images/profile-image-placeholder.png" width="40px" alt=""/>}
           </div>
           <div>
               {!this.state.editProfile 
-              ? <div>
-                  <ProfileInfo user={this.state.user}/>
-                <button onClick={this.toggleEditProfile}>Edit Profile</button>
-              </div>
+              ? <ProfileInfo user={this.state.user} toggleEditProfile={this.toggleEditProfile}/>
               : 
               <EditProfile user={this.state.user} handleProfileFormSubmit={this.handleProfileFormSubmit} handleChange={this.handleChange} handleFileUpload={this.handleFileUpload}/>
               }
@@ -194,7 +190,7 @@ class MyProfile extends Component {
             : <UpdateBand band={this.state.user.band} updateBand={this.updateBand} handleBandImgUpload={this.handleBandImgUpload} handleBandFormSubmit={this.handleBandFormSubmit} handleBandChange={this.handleBandChange} deleteBand={this.deleteBand} bandExists={this.state.user.isBandPOC}></UpdateBand> 
           : !this.state.updateBand
             ? <div>
-                <p>You haven't published any bands yet</p>
+                <p>You haven't published a band yet</p>
                 <button onClick={this.updateBand}>Add a band</button>
               </div>
             : <UpdateBand band={this.state.user.band} updateBand={this.updateBand} handleBandImgUpload={this.handleBandImgUpload} handleBandFormSubmit={this.handleBandFormSubmit} handleBandChange={this.handleBandChange}></UpdateBand> 

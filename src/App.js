@@ -9,7 +9,7 @@ import MyProfile from './pages/MyProfile';
 import GigBoard from './pages/GigBoard';
 // import BandPage from './pages/BandPage';
 
-// import bandService from './lib/bands-service';
+import bandService from './lib/bands-service';
 import Navbar from './components/Navbar';
 import AnonRoute from './components/AnonRoute';
 import PrivateRoute from './components/PrivateRoute';
@@ -20,7 +20,16 @@ import PrivateRoute from './components/PrivateRoute';
 class App extends Component {
 
   state = {
-    bands: []
+    bandsNames: []
+  }
+
+  getBandNames = () => {
+    bandService.getAllBands()
+      .then(bandsArr => console.log(bandsArr))
+  }
+
+  componentDidMount () {
+
   }
 
   render() {

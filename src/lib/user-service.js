@@ -15,8 +15,8 @@ class UserService {
     return pr;
   }
 
-  editUser = (username, image, dateOfBirth, phoneNumber, aboutBio) => {
-    const pr = this.api.put(`/user`, {username, image, dateOfBirth, phoneNumber, aboutBio})
+  editUser = (username, image, phoneNumber, aboutBio) => {
+    const pr = this.api.put(`/user`, {username, image, phoneNumber, aboutBio})
     return pr;
   }
 

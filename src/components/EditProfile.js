@@ -15,8 +15,6 @@ function EditProfile (props) {
                         ></input>
                     <label>Username</label>
                     <input type="text" name="username" value={username} onChange={(e) => handleChange(e)}/>
-                    <label>Date of birth</label>
-                    <input type="text" name="dateOfBirth" value={dateOfBirth} onChange={(e) => handleChange(e)}/>
                     <label>Phone number</label>
                     <input type="text" name="phoneNumber" value={phoneNumber} onChange={(e) => handleChange(e)}/>
                     <label>About me</label>

@@ -58,7 +58,6 @@ class Home extends Component {
              }
            })}
          </section>
-         <article>little article + link to publish band/login</article>
          <aside>FAQ link</aside>
        </div>
     )

@@ -21,10 +21,6 @@ function ProfileInfo (props) {
                             <td>{props.user.username}</td>
                         </tr>
                         <tr>
-                            <td>Date of birth</td>
-                            <td>{props.user.dateOfBirth}</td>
-                        </tr>
-                        <tr>
                             <td>Phone number</td>
                             <td>{props.user.phoneNumber}</td>
                         </tr>
@@ -34,6 +30,7 @@ function ProfileInfo (props) {
                         </tr>
                     </tbody>
                 </table>
+                <button onClick={props.toggleEditProfile}>Edit Profile</button>
                 <div>
                     <h2>My pending gigs: </h2>
                     {gigArr

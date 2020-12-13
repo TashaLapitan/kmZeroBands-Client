@@ -24,6 +24,7 @@ function GigCard(props) {
             </ul>
             <p>{description}</p>
             <p>Posted by: {user.username}</p>
+            <p>Contact: {user.phoneNumber}</p>
         </div>
     )
 }

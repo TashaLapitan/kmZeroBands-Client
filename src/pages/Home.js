@@ -16,10 +16,10 @@ class Home extends Component {
     showAddGig: false,
     gigsArr: [],
     bandCities: [],
-    bandGenres: [],                      //for datalist
+    bandGenres: [],                      
     bandSearch: {
       city: "",
-      genre: "",                      //from search onChange
+      genre: "",                      
       title: ""
     },
     bandsToDisplay: [],
@@ -31,11 +31,17 @@ class Home extends Component {
   toggleAddGig = () => {
     this.setState({showAddGig: !this.state.showAddGig});
   }
+ 
+  // INSTEAD OF KATA TOMORROW TASHA
 
   getGigs = () => {
     gigService.getAllGigs()
       .then((response) => {
-        const tenGigs = response.data.slice(0,10)
+        const allGigs = response.data;
+        const dateToday = new Date(Date.now());
+        let tenGigs = allGigs.filter(gig => gig.date > dateToday);
+        console.log('tenGigs', tenGigs)
+        
         this.setState({gigsArr: tenGigs})
       })
   }
@@ -107,6 +113,7 @@ class Home extends Component {
     this.getGigs();
     this.getBandOptions();
     this.getAllBands();
+    
   }
 
   render() {
@@ -155,13 +162,9 @@ class Home extends Component {
                   </div>}
          </main>
          <section>
-           {this.state.gigsArr.map(gig => {
-             const today = new Date(Date.now());
-             const gigDate = new Date(gig.date);
-             if (gigDate >= today) {
+           {this.state.gigsArr.map((gig, i) => {
               return <GigCard key={gig._id} gig={gig}/>
-             }
-           })}
+             })}
          </section>
          <aside>FAQ link</aside>
        </div>

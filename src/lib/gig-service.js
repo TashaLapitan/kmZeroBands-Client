@@ -34,10 +34,10 @@ class GigService {
       return pr;
     }
   
-    // deleteBand = (id) => {
-    //   const pr = this.api.delete(`/bands/${id}` )
-    //   return pr;
-    // }
+    deleteGig = (id) => {
+      const pr = this.api.delete(`/gigs/${id}` )
+      return pr;
+    }
   
   }
   

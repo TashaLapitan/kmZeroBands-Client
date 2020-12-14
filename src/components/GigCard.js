@@ -37,6 +37,13 @@ class GigCard extends Component {
         
     }
 
+    handleDelete = () => {
+        gigService.deleteGig(this.state.gig._id)
+            .then(() => {
+                this.toggleEditGig();
+            })
+    }
+
     toggleEditGig = () => {
         this.setState({canEditGig: !this.state.canEditGig})
     }
@@ -126,7 +133,7 @@ class GigCard extends Component {
                 {this.props.user._id === this.state.user._id
                 ? <div>
                         <button onClick={this.toggleEditGig}>Edit</button>
-                        <button>Delete</button>
+                        <button onClick={this.handleDelete}>Delete</button>
                     </div>
                 : null}
             </div>

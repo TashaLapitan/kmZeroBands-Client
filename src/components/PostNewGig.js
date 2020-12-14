@@ -47,7 +47,7 @@ class PostNewGig extends Component {
                 </textarea> <br/>
                 <label>Which music genre best describes your gig? </label> <br/>
                 <input type="text" name="genre" value={this.state.genre} onChange={(e) => this.handleInput(e)}/> <br/>
-                <label>How long will your gig last? Give a number in hours</label> <br/>
+                <label>How long will your gig last?</label> <br/>
                 <input type="number" min="0" name="durationHours" value={this.state.durationHours} onChange={(e) => this.handleInput(e)}/><span> hours</span> <br/>
                 <label>How much do you offer?</label> <br/>
                 <input type="number" min="0" name="pricePerHour" value={this.state.pricePerHour} onChange={(e) => this.handleInput(e)}/><span> € per hour</span> <br/>

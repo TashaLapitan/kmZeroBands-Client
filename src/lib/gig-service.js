@@ -4,7 +4,7 @@ class GigService {
     constructor() {
       
       this.api = axios.create({        
-        baseURL: "http://localhost:5000/api",
+        baseURL: `${process.env.REACT_APP_API_URL}/api`,
         withCredentials: true
       });
     }
@@ -29,11 +29,10 @@ class GigService {
       return pr
     }
   
-    // updateBandInfo = (bandID, title, description, image, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod) => {
-    //   const genres = [genre1, genre2, genre3];
-    //   const pr = this.api.put(`/bands/${bandID}`, {title, description, image, genres, phoneNumber, contactInfo, instagramUrl, youtubeUrl, pricePerHour, canCustomizePlaylist, minNoticePeriod})
-    //   return pr;
-    // }
+    updateGig = (_id, title, description, city, date, genre, durationHours, pricePerHour) => {
+      const pr = this.api.put(`/gigs/${_id}`, {title, description, city, date, genre, durationHours, pricePerHour})
+      return pr;
+    }
   
     // deleteBand = (id) => {
     //   const pr = this.api.delete(`/bands/${id}` )

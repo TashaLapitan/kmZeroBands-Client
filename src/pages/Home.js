@@ -35,7 +35,8 @@ class Home extends Component {
   getGigs = () => {
     gigService.getAllGigs()
       .then((response) => {
-        this.setState({gigsArr: response.data})
+        const tenGigs = response.data.slice(0,10)
+        this.setState({gigsArr: tenGigs})
       })
   }
 

@@ -1,10 +1,11 @@
-import React from 'react'
+import React from 'react';
+import {Link} from 'react-router-dom';
 
 function BandCard (props) {
 
     //band image is the background image of the card
 
-    const {title, city, genres} = props.band;
+    const {title, city, genres, endpoint} = props.band;
     return (
         <div> 
             <h3>{title}</h3>
@@ -12,6 +13,7 @@ function BandCard (props) {
             {genres.map(genre => {
                 return <p key={genre}>{genre}</p>
             })}
+            <Link to={`/${endpoint}`}><button>Visit page</button></Link>
         </div>
     )
 }

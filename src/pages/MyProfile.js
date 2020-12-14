@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { withAuth } from './../context/auth-context';
-// import { Link } from "react-router-dom";
 import axios from 'axios';
 import userService from './../lib/user-service';
 import bandService from './../lib/bands-service';
@@ -92,13 +91,12 @@ class MyProfile extends Component {
     const uploadData = new FormData();
     uploadData.append("image", file);
     axios
-      .post('http://localhost:5000/api/user/upload', uploadData, {
+      .post(`${process.env.REACT_APP_API_URL}/api/user/upload`, uploadData, {
         withCredentials: true,
       })
       .then((response) => {
         console.log("response is: ", response);
         this.setState({ user: {...this.state.user, image: response.data.secure_url }});
-        // console.log('IMAGE IN STATE AFTER SET STATE BEFORE EDIT PROFILE: ', this.state.user.image)
       })
       .catch((err) => {
         console.log("Error while uploading the file: ", err);
@@ -110,7 +108,7 @@ class MyProfile extends Component {
     const uploadData = new FormData();
     uploadData.append("image", file);
     axios
-      .post('http://localhost:5000/api/bands/upload', uploadData, {
+      .post(`${process.env.REACT_APP_API_URL}/api/bands/upload`, uploadData, {
         withCredentials: true,
       })
       .then((response) => {

@@ -59,10 +59,10 @@ function BandInfo(props) {
                     {instagramUrl || youtubeUrl
                     ? <tr>
                         {instagramUrl 
-                        ? <td><Link to={instagramUrl}><img src="/images/instagram-logo.png" width="30px" alt=""/></Link></td>
+                        ? <td><a href={instagramUrl} target="_blank"><img src="/images/instagram-logo.png" width="30px" alt=""/></a></td>
                         : <td></td>}
                         {youtubeUrl 
-                        ? <td><Link to={youtubeUrl}><img src="/images/youtube-logo.png" width="30px" alt=""/></Link></td>
+                        ? <td><a to={youtubeUrl} target="_blank"><img src="/images/youtube-logo.png" width="30px" alt=""/></a></td>
                         : <td></td>}                        
                       </tr>
                     : null

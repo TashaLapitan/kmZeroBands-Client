@@ -7,9 +7,8 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import MyProfile from './pages/MyProfile';
 import GigBoard from './pages/GigBoard';
-// import BandPage from './pages/BandPage';
+import BandPage from './pages/BandPage';
 
-import bandService from './lib/bands-service';
 import Navbar from './components/Navbar';
 import AnonRoute from './components/AnonRoute';
 import PrivateRoute from './components/PrivateRoute';
@@ -17,22 +16,8 @@ import PrivateRoute from './components/PrivateRoute';
 
 
 
-class App extends Component {
+function App () {
 
-  state = {
-    bandsNames: []
-  }
-
-  getBandNames = () => {
-    bandService.getAllBands()
-      .then(bandsArr => console.log(bandsArr))
-  }
-
-  componentDidMount () {
-
-  }
-
-  render() {
     return (
       <div className="container">
         <Navbar />
@@ -40,7 +25,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/gigboard" component={GigBoard} />
-          {/* <Route exact path="/band/:id" component={BandPage}/> */}
+          <Route exact path="/bands/:endpoint" component={BandPage}/>
 
           <AnonRoute exact path="/signup" component={Signup} />
           <AnonRoute exact path="/login" component={Login} />
@@ -50,6 +35,5 @@ class App extends Component {
       </div>
     );
   }
-}
 
 export default App;

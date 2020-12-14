@@ -94,9 +94,12 @@ class Home extends Component {
   handleChange = (event) => {
     const {name, value} = event.target;
     this.setState({bandSearch: {...this.state.bandSearch, [name]: value}, showSearchResults: true});
-    this.filterBand(name, this.state.bandSearch[name]);
+     if (this.state.bandSearch === {city: "", genre: "", title: ""}) {
+      this.setState({searchBandRes: this.state.allBands})
+    } else {
+      this.filterBand(name, this.state.bandSearch[name]);
+    }
     console.log(this.state.searchBandRes)
-    console.log(this.state.showSearchResults)
   }
 
   componentDidMount () {
@@ -120,7 +123,7 @@ class Home extends Component {
             {this.state.showSearchResults 
             ? <div>
                 {this.state.searchBandRes === []      // TERNARY NOT WORKING, DIV ON LINE 123 NOT RENDERING
-                ? <div>Sorry, couldn't find any</div>            
+                ? <div><p>Sorry, couldn't find any bands</p></div>            
                 : <div>
                     {this.state.searchBandRes.map((bandObj) => {
                       return <BandCard key={bandObj._id} band={bandObj}/>

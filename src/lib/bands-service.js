@@ -21,7 +21,8 @@ class BandService {
   }
 
   createBand = (title, description, image, city, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod) => {
-    const genres = [genre1, genre2, genre3];
+    const genresArr = [genre1, genre2, genre3];
+    const genres = genresArr.filter(genre => genre !== "")
     const pr = this.api.post('/bands', {title, description, image, city, genres, phoneNumber, contactInfo, instagramUrl, youtubeUrl, pricePerHour, canCustomizePlaylist, minNoticePeriod})
     return pr
   }

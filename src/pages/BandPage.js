@@ -40,8 +40,6 @@ class BandPage extends Component {
     render() {
 
         const {image, title, city, genres, description, pocID, contactInfo, pricePerHour, phoneNumber, instagramUrl, youtubeUrl, canCustomizePlaylist, minNoticePeriod} = this.state.band;
-
-        console.log('genres', genres)
         
         return (
             <main>

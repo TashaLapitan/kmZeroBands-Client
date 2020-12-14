@@ -36,9 +36,14 @@ function BandInfo(props) {
                     <tr>
                         <td>Genres</td>
                         <td>
-                            {genres.map((genre,i) => {
-                                return <span key={i}>{genre}, </span>
-                            })}
+                                {genres.map((genre, i, arr) => {
+                                    if (i === arr.length-1) {
+                                        return <span key={genre}>{genre}</span>
+                                    } else {
+                                        return <span key={genre}>{genre}, </span>
+                                    }
+                                    
+                                })}
                         </td>
                     </tr>
                     <tr>

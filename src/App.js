@@ -25,12 +25,13 @@ function App () {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/gigboard" component={GigBoard} />
-          <Route exact path="/bands/:endpoint" component={BandPage}/>
+          
 
           <AnonRoute exact path="/signup" component={Signup} />
           <AnonRoute exact path="/login" component={Login} />
 
           <PrivateRoute exact path="/my-profile" component={MyProfile} />
+          <Route exact path="/:endpoint" component={BandPage}/>
         </Switch>
       </div>
     );

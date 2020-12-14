@@ -5,18 +5,19 @@ class BandPage extends Component {
 
     state = {
         band: {image: "", 
-            title: "", city: "",
-             genres: [],
-             description: "",
-             pocID: {
-                username: ""
-             },
-             contactInfo: "",
-             phoneNumber: "",
-             instagramUrl: "",
-             youtubeUrl: "",
-             canCustomizePlaylist: undefined,
-             minNoticePeriod: undefined}
+            title: "", 
+            city: "",
+            genres: [],
+            description: "",
+            pocID: {
+            username: ""
+            },
+            contactInfo: "",
+            phoneNumber: "",
+            instagramUrl: "",
+            youtubeUrl: "",
+            canCustomizePlaylist: undefined,
+            minNoticePeriod: undefined}
     }
 
     getBand = () => {
@@ -27,13 +28,12 @@ class BandPage extends Component {
             const foundBand = allBands.find(band => {
                 return band.endpoint === endpoint;
             })
-            // console.log('foundBand', foundBand)  GETS ALL REQUIRED INFO 
+            console.log('foundBand', foundBand)
             this.setState({band: foundBand})
         })
     }
 
     componentDidMount () {
-        
         this.getBand();
     }
 

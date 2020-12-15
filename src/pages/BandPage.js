@@ -17,7 +17,8 @@ class BandPage extends Component {
             instagramUrl: "",
             youtubeUrl: "",
             canCustomizePlaylist: undefined,
-            minNoticePeriod: undefined}
+            minNoticePeriod: undefined},
+        contactInfoShows: false
     }
 
     getBand = () => {
@@ -28,9 +29,12 @@ class BandPage extends Component {
             const foundBand = allBands.find(band => {
                 return band.endpoint === endpoint;
             })
-            console.log('foundBand', foundBand)
             this.setState({band: foundBand})
         })
+    }
+
+    toggleContactInfo = () => {
+        this.setState({contactInfoShows: !this.state.contactInfoShows})
     }
 
     componentDidMount () {
@@ -53,7 +57,6 @@ class BandPage extends Component {
                 </ul>
                 <p>{description}</p>
                 <p>Managed by {pocID.username}</p>
-                <p>{phoneNumber} / {contactInfo}</p>
                 {instagramUrl 
                     ? <a href={instagramUrl}><img src="/images/instagram-logo.png" width="30px" alt=""/></a>
                     : null} 
@@ -68,28 +71,17 @@ class BandPage extends Component {
                     : <div>
                         {title} prefer to stick to their own well-rehearsed repertoire and do not accept custom orders
                     </div> }
+
+                {this.state.contactInfoShows
+                ? <div>
+                    <p>Phone: {phoneNumber}</p>
+                    <p>Other info: {contactInfo}</p>
+                </div>
+                : <button onClick={this.toggleContactInfo}>Contact</button>}
+                
             </main>
         )
     }
 }
-
-
-
-// function BandPage (props) {
-
-    
-
-//     const thisBand = props.bands.find((band) => {
-//         return band.endpoint === endpoint;
-//     })    
-
-//     console.log('BAND PAGE LINE 13 ', props)
-
-//     const {image, title, city, genres, description, pocID, contactInfo, phoneNumber, instagramUrl, youtubeUrl, canCustomizePlaylist, minNoticePeriod} = thisBand;
-    
-//     return (
-        
-//     )
-// }
 
 export default BandPage;

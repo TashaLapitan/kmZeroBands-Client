@@ -31,6 +31,8 @@ class Navbar extends Component {
         <Link to={'/'} id='home-btn'>
           <h4>Logoimage</h4>
         </Link>
+        <Link to="/gigboard">Gig Board</Link>
+        <Link to="/faq">FAQ</Link>
         {this.props.isLoggedIn 
         ? (
           <>

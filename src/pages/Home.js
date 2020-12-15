@@ -31,8 +31,6 @@ class Home extends Component {
   toggleAddGig = () => {
     this.setState({showAddGig: !this.state.showAddGig});
   }
- 
-  // INSTEAD OF KATA TOMORROW TASHA
 
   getGigs = () => {
     gigService.getAllGigs()
@@ -110,7 +108,6 @@ class Home extends Component {
     } else {
       this.filterBand(name, this.state.bandSearch[name]);
     }
-    console.log(this.state.searchBandRes)
   }
 
   componentDidMount () {
@@ -134,8 +131,8 @@ class Home extends Component {
               />
             {this.state.showSearchResults 
             ? <div>
-                {this.state.searchBandRes === []      // TERNARY NOT WORKING, DIV ON LINE 123 NOT RENDERING
-                ? <div><p>Sorry, couldn't find any bands</p></div>            
+                {this.state.searchBandRes.length === 0 
+                ? <div><p>Sorry, no results. But why don't you... </p></div>            
                 : <div>
                     {this.state.searchBandRes.map((bandObj) => {
                       return <BandCard key={bandObj._id} band={bandObj}/>
@@ -157,11 +154,11 @@ class Home extends Component {
               </div>
             : this.props.isLoggedIn && !this.state.showAddGig
               ? <div>
-                  <p>Didn't find what you were looking for? No worries, publish your own gig and receive offers from your local musicians!</p>
+                  <p>Publish your own gig and receive offers from your local musicians!</p>
                   <button onClick={this.toggleAddGig}>Post a gig</button>
                 </div>
               :  <div>
-                    <p>Didn't find what you were looking for? No worries, publish your own gig and receive offers from your local musicians!</p>
+                    <p>Publish your own gig and receive offers from your local musicians!</p>
                     <Link to='/login'><button>Post a gig</button></Link>
                   </div>}
          </main>
@@ -170,7 +167,6 @@ class Home extends Component {
               return <GigCard key={gig._id} gig={gig} user={this.props.user}/>
              })}
          </section>
-         <aside>FAQ link</aside>
        </div>
     )
   }

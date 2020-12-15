@@ -39,8 +39,12 @@ class Home extends Component {
       .then((response) => {
         const allGigs = response.data;
         const dateToday = new Date(Date.now());
-        let tenGigs = allGigs.filter(gig => gig.date > dateToday);
-        console.log('tenGigs', tenGigs)
+        let pendingGigs = [];
+        allGigs.forEach((gig) => {
+          const gigDate = new Date(gig.date)
+          if (gigDate >= dateToday) 
+          {pendingGigs.push(gig)}});
+        const tenGigs = pendingGigs.slice(0,10)
         
         this.setState({gigsArr: tenGigs})
       })
@@ -163,7 +167,7 @@ class Home extends Component {
          </main>
          <section>
            {this.state.gigsArr.map((gig, i) => {
-              return <GigCard key={gig._id} gig={gig}/>
+              return <GigCard key={gig._id} gig={gig} user={this.props.user}/>
              })}
          </section>
          <aside>FAQ link</aside>

@@ -153,7 +153,7 @@ class MyProfile extends Component {
       }
     })
   }
-
+   
   componentDidMount () {
     this.setComponentState();
   }
@@ -170,7 +170,7 @@ class MyProfile extends Component {
           </div>
           <div>
               {!this.state.editProfile 
-              ? <ProfileInfo user={this.state.user} toggleEditProfile={this.toggleEditProfile}/>
+              ? <ProfileInfo user={this.state.user} toggleEditProfile={this.toggleEditProfile} setComponentState={this.setComponentState}/>
               : 
               <EditProfile user={this.state.user} handleProfileFormSubmit={this.handleProfileFormSubmit} handleChange={this.handleChange} handleFileUpload={this.handleFileUpload}/>
               }

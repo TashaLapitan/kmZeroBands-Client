@@ -22,8 +22,6 @@ function BandSearch (props) {
             </datalist>
 
             <input type="text" name="title" value={title} onChange={e => handleChange(e)} placeholder="Type the name of a band"></input>
-            {/* BETTER DYNAMIC SEARCH THEN BUTTON WON'T BE NEEDED */}
-            <button type="submit">Search</button> 
         </form>
     )
 }

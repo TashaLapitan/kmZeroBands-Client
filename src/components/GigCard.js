@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withAuth } from './../context/auth-context';
 import gigService from './../lib/gig-service';
+import userService from './../lib/user-service';
 
 class GigCard extends Component {
 
@@ -14,7 +15,7 @@ class GigCard extends Component {
             durationHours: undefined,
             pricePerHour: undefined
         },
-        user: {
+        gigAuthor: {
             username: "",
             phoneNumber: ""
         },
@@ -24,6 +25,13 @@ class GigCard extends Component {
     handleChange = (event) => {
         const {name, value} = event.target;
         this.setState({gig: {...this.state.gig, [name]: value}})
+    }
+
+    getGigAuthor = () => {
+        userService.getUser(this.props.gig.clientID)
+            .then((response) => {
+                this.setState({gigAuthor: response.data})
+            })
     }
 
     handleSubmit = (event) => {
@@ -37,19 +45,13 @@ class GigCard extends Component {
         
     }
 
-    handleDelete = () => {
-        gigService.deleteGig(this.state.gig._id)
-            .then(() => {
-                this.toggleEditGig();
-            })
-    }
-
     toggleEditGig = () => {
         this.setState({canEditGig: !this.state.canEditGig})
     }
 
     componentDidMount () {
-        this.setState({gig: this.props.gig, user: this.props.gig.clientID});
+        this.setState({gig: this.props.gig});
+        this.getGigAuthor();
     }    
 
     render() {
@@ -111,8 +113,8 @@ class GigCard extends Component {
             return dateToShow;
         }
         
-        const {title, city, date, durationHours, pricePerHour, genre, description} = this.state.gig;
-        const {username, phoneNumber} = this.state.user;
+        const {title, city, date, durationHours, pricePerHour, genre, description, _id} = this.state.gig;
+        const {username, phoneNumber} = this.state.gigAuthor;
 
         return (
             <section>
@@ -129,33 +131,32 @@ class GigCard extends Component {
                 <p>{description}</p>
                 <p>Posted by: {username}</p>
                 <p>Contact: {phoneNumber}</p>
-
-                {this.props.user._id === this.state.user._id
-                ? <div>
-                        <button onClick={this.toggleEditGig}>Edit</button>
-                        <button onClick={this.handleDelete}>Delete</button>
-                    </div>
+                { this.props.user && this.props.user._id === this.state.gigAuthor._id
+                ?   <button onClick={this.toggleEditGig}>Edit</button>
                 : null}
             </div>
-            : <form onSubmit={e => this.handleSubmit(e)}>
-                <label>Title:</label>
-                <input type="text" name="title" value={title} onChange={e => this.handleChange(e)}></input>
-                <label>Description:</label>
-                <input type="text" name="description" value={description} onChange={e => this.handleChange(e)}></input>
-                <label>City:</label>
-                <input type="text" name="city" value={city} onChange={e => this.handleChange(e)}></input>
-                <label>Date</label>
-                <input type="date" name="date" value={displayDateInput(date)} onChange={e => this.handleChange(e)}></input>
-                <label>Genre:</label>
-                <input type="text" name="genre" value={genre} onChange={e => this.handleChange(e)}></input>
-                <label>Duration:</label>
-                <input type="number" name="durationHours" value={durationHours} onChange={e => this.handleChange(e)}></input><span> hours</span>
-                <label>Reward per hour:</label>
-                <input type="number" name="pricePerHour" value={pricePerHour} onChange={e => this.handleChange(e)}></input>€/hr
+            : <div>
+                <form onSubmit={e => this.handleSubmit(e)}>
+                    <label>Title:</label>
+                    <input type="text" name="title" value={title} onChange={e => this.handleChange(e)}></input>
+                    <label>Description:</label>
+                    <input type="text" name="description" value={description} onChange={e => this.handleChange(e)}></input>
+                    <label>City:</label>
+                    <input type="text" name="city" value={city} onChange={e => this.handleChange(e)}></input>
+                    <label>Date</label>
+                    <input type="date" name="date" value={displayDateInput(date)} onChange={e => this.handleChange(e)}></input>
+                    <label>Genre:</label>
+                    <input type="text" name="genre" value={genre} onChange={e => this.handleChange(e)}></input>
+                    <label>Duration:</label>
+                    <input type="number" name="durationHours" value={durationHours} onChange={e => this.handleChange(e)}></input><span> hours</span>
+                    <label>Reward per hour:</label>
+                    <input type="number" name="pricePerHour" value={pricePerHour} onChange={e => this.handleChange(e)}></input>€/hr
 
-                <button type="submit">Save</button>
-                <button onClick={this.toggleEditGig}>Discard</button>
-            </form>}
+                    <button type="submit">Save</button>
+                    <button onClick={this.toggleEditGig}>Cancel</button>
+                </form>
+                <button onClick={(e)=> this.props.handleDelete(e, _id)}>Delete</button>
+            </div>}
             </section>
         )
     }

@@ -21,8 +21,9 @@ class PostNewGig extends Component {
 
     handleGigSubmit = event => {
         event.preventDefault();
-        const {title, description, date, city, genre, durationHours, pricePerHour} = this.state;
-        gigService.createGig(title, description, date, city, genre, durationHours, pricePerHour)
+        const {title, description, date, city, genre, durationHours, pricePerHour} = this.state; 
+        const newDate = new Date(date);
+        gigService.createGig(title, description, newDate, city, genre, durationHours, pricePerHour)
             .then(() => {
                 this.props.toggleAddGig();
                 this.props.getGigs();

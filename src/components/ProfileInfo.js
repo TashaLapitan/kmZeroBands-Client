@@ -1,9 +1,19 @@
-import React from "react";
+import React, { Component } from 'react'
 import GigCard from './../components/GigCard';
+import gigService from './../lib/gig-service';
 
-function ProfileInfo (props) {
+class ProfileInfo extends Component {
 
-        const gigArr = props.user.gigHistory;
+
+    handleDelete = (event, id) => {
+        event.preventDefault();
+        gigService.deleteGig(id)
+            .then(() => {
+                this.props.setComponentState();
+            })
+    }
+
+    render() {
 
         return (
             <section>
@@ -18,34 +28,38 @@ function ProfileInfo (props) {
                     <tbody>
                         <tr>
                             <td>Username</td>
-                            <td>{props.user.username}</td>
+                            <td>{this.props.user.username}</td>
                         </tr>
                         <tr>
                             <td>Phone number</td>
-                            <td>{props.user.phoneNumber}</td>
+                            <td>{this.props.user.phoneNumber}</td>
                         </tr>
                         <tr>
                             <td>About me</td>
-                            <td>{props.user.aboutBio}</td>
+                            <td>{this.props.user.aboutBio}</td>
                         </tr>
                     </tbody>
                 </table>
-                <button onClick={props.toggleEditProfile}>Edit Profile</button>
+                <button onClick={this.props.toggleEditProfile}>Edit Profile</button>
                 <div>
                     <h2>My pending gigs: </h2>
-                    {gigArr
-                    ? gigArr.map(gig => {
+                    {this.props.user.gigHistory
+                    ? this.props.user.gigHistory.map(gig => {
                         const today = new Date(Date.now());
                         const gigDate = new Date(gig.date);
                         if (gigDate >= today) {
-                            return <GigCard key={gig._id} gig={gig}/>
-                        } 
-                        })
+                            return  <div  key={gig._id}>
+                                        <GigCard gig={gig} handleDelete={this.handleDelete} user={this.props.user}/>
+                                    </div>
+                            
+                            
+                        }})
                     : <p>You haven't posted any gigs yet</p>}
                 </div>
             </section>
-            
         )
+    }
 }
+
 
 export default ProfileInfo;

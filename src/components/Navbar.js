@@ -42,7 +42,7 @@ class Navbar extends Component {
               : <Link to={'/my-profile'}><img src="/images/profile-image-placeholder.png" width="40px" alt=""/></Link>}
           </div>
             
-            <Link onClick={this.props.logout} to="/">
+            <Link onClick={() => this.props.logout()} to="/">
               <img src="/images/logout-btn.png" width="20px" height="20px" alt=""/>
             </Link>
           </>

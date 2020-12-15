@@ -19,12 +19,19 @@ class GigCard extends Component {
             username: "",
             phoneNumber: ""
         },
-        canEditGig: false
+        canEditGig: false,
+        canRespond: false,
+        comment: ""
     }
 
     handleChange = (event) => {
         const {name, value} = event.target;
         this.setState({gig: {...this.state.gig, [name]: value}})
+    }
+
+    handleMessageInput = (event) => {
+        const input = event.target.value;
+        this.setState({comment: input})
     }
 
     getGigAuthor = () => {
@@ -45,8 +52,22 @@ class GigCard extends Component {
         
     }
 
+    handleGigResponse = (event) => {
+        event.preventDefault();
+        const message = this.state.comment;
+
+        gigService.addGigResponse(this.state.gig._id, this.props.user.band, message)
+            .then(() => 
+                this.toggleRespond()
+            )
+    }
+
     toggleEditGig = () => {
         this.setState({canEditGig: !this.state.canEditGig})
+    }
+
+    toggleRespond = () => {
+        this.setState({canRespond: !this.state.canRespond})
     }
 
     componentDidMount () {
@@ -119,23 +140,41 @@ class GigCard extends Component {
         return (
             <section>
                 {!this.state.canEditGig
-            ?   <div>
-                <h2>{title}</h2>
-                <ul>
-                    <li>{city}</li>
-                    <li>{formatDate(date)}</li>
-                    <li>{durationHours} hours</li>
-                    <li>{pricePerHour}€ per hour</li>
-                    <li>{genre}</li>
-                </ul>
-                <p>{description}</p>
-                <p>Posted by: {username}</p>
-                <p>Contact: {phoneNumber}</p>
-                { this.props.user && this.props.user._id === this.state.gigAuthor._id
-                ?   <button onClick={this.toggleEditGig}>Edit</button>
-                : null}
-            </div>
-            : <div>
+                ?   <div>
+                        <h2>{title}</h2>
+                        <ul>
+                            <li>{city}</li>
+                            <li>{formatDate(date)}</li>
+                            <li>{durationHours} hours</li>
+                            <li>{pricePerHour}€ per hour</li>
+                            <li>{genre}</li>
+                        </ul>
+                        <p>{description}</p>
+                        <p>Posted by: {username}</p>
+                        <p>Contact: {phoneNumber}</p>
+
+                        {this.props.user && this.props.user.isBandPOC === true && this.props.user._id !== this.state.gigAuthor._id
+                        ? <div>
+                            {this.state.canRespond
+                                ? <form onSubmit={(e) => {this.handleGigResponse(e)}}>
+                                    <label>Your message: </label> 
+                                    <input type="text" name="comment" value={this.state.comment} onChange={(e) => {this.handleMessageInput(e)}}></input>
+                                    <button>Send</button>
+                                    <button onClick={this.toggleRespond}>Discard</button>
+                                </form>
+                                : <button onClick={this.toggleRespond}>I can do it!</button>}
+                        </div> 
+                        : null}
+
+                        
+
+
+
+                        { this.props.user && this.props.user._id === this.state.gigAuthor._id
+                        ?   <button onClick={this.toggleEditGig}>Edit</button>
+                        : null}
+                    </div>
+                : <div>
                 <form onSubmit={e => this.handleSubmit(e)}>
                     <label>Title:</label>
                     <input type="text" name="title" value={title} onChange={e => this.handleChange(e)}></input>

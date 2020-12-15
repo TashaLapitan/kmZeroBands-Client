@@ -33,6 +33,12 @@ class GigService {
       const pr = this.api.put(`/gigs/${_id}`, {title, description, city, date, genre, durationHours, pricePerHour})
       return pr;
     }
+
+    addGigResponse = (id, bandID, comment) => {
+      console.log('id, bandID, comment', id, bandID, comment)
+      const pr = this.api.put(`gigs/response/${id}`, {bandID, comment})
+      return pr;
+    }
   
     deleteGig = (id) => {
       const pr = this.api.delete(`/gigs/${id}` )

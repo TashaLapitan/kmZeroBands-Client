@@ -37,6 +37,9 @@ class Navbar extends Component {
         ? (
           <>
           <div>
+              {this.state.user.hasUnreadMsg
+              ? <Link to={"/my-profile"}><span>NEW MESSAGE</span></Link> 
+              : null}
               {this.state.user.image 
               ? <Link to={'/my-profile'}><img src={this.state.user.image} alt=""/></Link>
               : <Link to={'/my-profile'}><img src="/images/profile-image-placeholder.png" width="40px" alt=""/></Link>}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import GigCard from './../components/GigCard';
+import MessageCard from './../components/MessageCard';
 import gigService from './../lib/gig-service';
 
 class ProfileInfo extends Component {
@@ -14,6 +15,16 @@ class ProfileInfo extends Component {
     }
 
     render() {
+
+        const myGigs = this.props.user.gigHistory;
+
+        let allMessages = [];
+        myGigs.forEach(gig => {
+            if (gig.bandResponses.length !== 0){
+            gig.bandResponses.forEach(message => {
+                allMessages.push(message)
+            })
+        }}) 
 
         return (
             <section>
@@ -43,23 +54,32 @@ class ProfileInfo extends Component {
                 <button onClick={this.props.toggleEditProfile}>Edit Profile</button>
                 <div>
                     <h2>My pending gigs: </h2>
-                    {this.props.user.gigHistory
-                    ? this.props.user.gigHistory.map(gig => {
+                    {myGigs
+                    ? myGigs.map(gig => {
                         const today = new Date(Date.now());
                         const gigDate = new Date(gig.date);
                         if (gigDate >= today) {
                             return  <div  key={gig._id}>
                                         <GigCard gig={gig} handleDelete={this.handleDelete} user={this.props.user}/>
                                     </div>
-                            
-                            
                         }})
                     : <p>You haven't posted any gigs yet</p>}
                 </div>
+                <aside>
+                    <h2>My notifications: </h2>
+                    {allMessages.length > 0
+                    ? <div>
+                        {allMessages.map(message => {
+                            return <MessageCard key={message._id} message={message}/>
+                        })}
+                    </div>
+                    : <p>You haven't received any resposes yet</p>}
+                </aside>
             </section>
         )
     }
 }
 
+    
 
 export default ProfileInfo;

@@ -55,8 +55,9 @@ class GigCard extends Component {
     handleGigResponse = (event) => {
         event.preventDefault();
         const message = this.state.comment;
+        const {_id, title} = this.state.gig;
 
-        gigService.addGigResponse(this.state.gig._id, this.props.user.band, message)
+        gigService.addGigResponse(_id, this.props.user.band, title, message)
             .then(() => 
                 this.toggleRespond()
             )

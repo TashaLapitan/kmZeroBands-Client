@@ -36,7 +36,8 @@ class MyProfile extends Component {
         minNoticePeriod: undefined,
         pocID: undefined
       },
-      gigHistory: []
+      gigHistory: [],
+      hasUnreadMsg: undefined
     },
     editProfile: false,
     updateBand: false,
@@ -142,9 +143,9 @@ class MyProfile extends Component {
   setComponentState = () => {
     userService.getUser(this.props.user._id)
     .then((response) => {
-      const {username, image, dateOfBirth, phoneNumber, aboutBio, isBandPOC, band, gigHistory} = response.data;
+      const {username, image, dateOfBirth, phoneNumber, aboutBio, isBandPOC, band, gigHistory, hasUnreadMsg} = response.data;
       if (!band) {
-        this.setState({user: {...this.state.user, username, image, dateOfBirth, phoneNumber, aboutBio, isBandPOC, gigHistory}});
+        this.setState({user: {...this.state.user, username, image, dateOfBirth, phoneNumber, aboutBio, isBandPOC, gigHistory, hasUnreadMsg}});
       } else {
         band.genre1 = band.genres[0];
         band.genre2 = band.genres[1];

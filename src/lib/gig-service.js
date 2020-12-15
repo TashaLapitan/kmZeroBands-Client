@@ -34,9 +34,8 @@ class GigService {
       return pr;
     }
 
-    addGigResponse = (id, bandID, comment) => {
-      console.log('id, bandID, comment', id, bandID, comment)
-      const pr = this.api.put(`gigs/response/${id}`, {bandID, comment})
+    addGigResponse = (id, bandID, gigTitle, comment) => {
+      const pr = this.api.put(`gigs/response/${id}`, {bandID, gigTitle, comment})
       return pr;
     }
   

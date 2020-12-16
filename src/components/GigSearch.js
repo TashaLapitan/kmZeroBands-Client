@@ -12,7 +12,7 @@ function GigSearch(props) {
                     return <option key={city} value={city}></option>
                 })}
             </datalist>
-            <button type="submit">Search</button>
+            <button className="yes-btn" type="submit">Search</button>
         </form>
     )
 }

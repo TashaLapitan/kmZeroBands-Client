@@ -11,6 +11,7 @@ import BandPage from './pages/BandPage';
 import FAQ from './pages/FAQ';
 
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import AnonRoute from './components/AnonRoute';
 import PrivateRoute from './components/PrivateRoute';
 
@@ -34,6 +35,7 @@ function App () {
           <PrivateRoute exact path="/my-profile" component={MyProfile} />
           <Route exact path="/:endpoint" component={BandPage}/>
         </Switch>
+        <Footer/>
       </div>
     );
   }

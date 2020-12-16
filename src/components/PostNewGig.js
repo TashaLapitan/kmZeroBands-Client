@@ -32,10 +32,10 @@ class PostNewGig extends Component {
 
     render() {
         return (
-            <form onSubmit={(e) => this.handleGigSubmit(e)}>
+            <form onSubmit={(e) => this.handleGigSubmit(e)} className="add-form">
                 <h2>Tell us more about your gig</h2>
                 <label>Title: </label> <br/>
-                <input type="text" name="title" value={this.state.value} placeholder="Ex.: A romantic gesture" onChange={(e) => this.handleInput(e)}/> <br/>
+                <input type="text" name="title" value={this.state.value} placeholder="Ex.: Beach party" onChange={(e) => this.handleInput(e)}/> <br/>
                 <label>City: </label> <br/>
                 <input type="text" name="city" value={this.state.city} onChange={(e) => this.handleInput(e)}/> <br/>
                 <label>When are you planning this gig: </label> <br/>
@@ -43,7 +43,7 @@ class PostNewGig extends Component {
                 <label>Description: </label> <br/>
                 <textarea rows="4" cols="50" name="description" 
                     value={this.state.description}
-                    placeholder="Ex.: Looking for a decent sax player to play a cheesy song under my gf's window"
+                    placeholder="Ex.: Looking for a guitar player to join us at the beach"
                     onChange={(e) => this.handleInput(e)}>
                 </textarea> <br/>
                 <label>Which music genre best describes your gig? </label> <br/>
@@ -52,7 +52,8 @@ class PostNewGig extends Component {
                 <input type="number" min="0" name="durationHours" value={this.state.durationHours} onChange={(e) => this.handleInput(e)}/><span> hours</span> <br/>
                 <label>How much do you offer?</label> <br/>
                 <input type="number" min="0" name="pricePerHour" value={this.state.pricePerHour} onChange={(e) => this.handleInput(e)}/><span> € per hour</span> <br/>
-                <button type="submit">Post my gig!</button>
+                <button className="yes-btn" type="submit">Post my gig!</button>
+                <button onClick={this.props.toggleAddGig}>Discard</button>
             </form>
         )
     }

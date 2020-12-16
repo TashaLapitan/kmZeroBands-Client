@@ -27,37 +27,33 @@ class Navbar extends Component {
   render() {
 
     return (
-      <nav className="navbar">
-        <Link to={'/'} id='home-btn'>
-          <h4>Logoimage</h4>
-        </Link>
-        <Link to="/gigboard">Gig Board</Link>
-        <Link to="/faq">FAQ</Link>
-        {this.props.isLoggedIn 
-        ? (
-          <>
-          <div>
-              {this.state.user.image 
-              ? <Link to={'/my-profile'}><img src={this.state.user.image} alt=""/></Link>
-              : <Link to={'/my-profile'}><img src="/images/profile-image-placeholder.png" width="40px" alt=""/></Link>}
+      <nav className="navbar" style={{marginBottom: "50px"}}>
+        <div className="nav-links">
+            <Link to="/gigboard" className='home-btn'><h3>Gig Board</h3></Link>
           </div>
+        <Link to={'/'} className='home-btn'>
+          <img src="/images/ZEROkmBANDS_Logo.png" alt="" width="400px"/>
+        </Link>
+        {this.props.isLoggedIn 
+        ? <div style={{display: "flex"}}>
+              {this.state.user.image 
+              ? <Link to={'/my-profile'}><div className="profile-img"><img src={this.state.user.image} alt=""/></div></Link>
+              : <Link to={'/my-profile'}><div className="profile-img"><img src="/images/profile-image-placeholder.png" width="40px" alt=""/></div></Link>}
+          
             
             <Link onClick={() => this.props.logout()} to="/">
               <img src="/images/logout-btn.png" width="20px" height="20px" alt=""/>
             </Link>
-          </>
-        ) : (
-          <>
-          <div>
+          </div>
+       : <div>
             <Link to="/login">
-              <button className="navbar-button">Login</button>
+              <button className="yes-btn" className="navbar-button">Login</button>
             </Link>
             <Link to="/signup">
-              <button className="navbar-button">Signup</button>
+              <button className="yes-btn" className="navbar-button">Signup</button>
             </Link>
           </div>
-          </>
-        )}
+        }
       </nav>
     );
   }

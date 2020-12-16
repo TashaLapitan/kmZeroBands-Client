@@ -47,38 +47,43 @@ class BandPage extends Component {
         
         return (
             <main>
-                <img src={image} alt=""/>
                 <h1>{title}</h1>
                 <h3>{city}</h3>
-                <ul>
-                    {genres.map(genre => {
-                        return <li key={genre}>{genre}</li>
-                    })}
-                </ul>
-                <p>{description}</p>
-                <p>Managed by {pocID.username}</p>
-                {instagramUrl 
-                    ? <a href={instagramUrl}><img src="/images/instagram-logo.png" width="30px" alt=""/></a>
-                    : null} 
-                {youtubeUrl 
-                    ? <a href={youtubeUrl}><img src="/images/youtube-logo.png" width="30px" alt=""/></a>
-                    : null}
-                <p><span>Usual price: {pricePerHour}€ per hour of performance</span></p>
-                {canCustomizePlaylist
-                    ?   <div> 
-                            {title} can play a song of your choice given a minimum of {minNoticePeriod} days notice, how cool is that!
-                        </div>
-                    : <div>
-                        {title} prefer to stick to their own well-rehearsed repertoire and do not accept custom orders
-                    </div> }
-
+                <secion id="band-container">
+                    <img src={image} alt=""/>
+                    <div>
+                        <ul>
+                            {genres.map(genre => {
+                                return <li key={genre}>{genre}</li>
+                            })}
+                        </ul>
+                        <p>{description}</p>
+                        <p>Managed by {pocID.username}</p>
+                        <p><span>Usual price: {pricePerHour}€ per hour of performance</span></p>
+                        {canCustomizePlaylist
+                        ?   <p> 
+                                {title} can play a song of your choice <br/>given a minimum of {minNoticePeriod} days notice, how cool is that!
+                            </p>
+                        : <p>
+                            {title} prefer to stick to their own well-rehearsed repertoire <br/>and do not accept custom orders
+                        </p> }
+                    </div>
+                </secion>
                 {this.state.contactInfoShows
-                ? <div>
-                    <p>Phone: {phoneNumber}</p>
-                    <p>Other info: {contactInfo}</p>
-                </div>
-                : <button onClick={this.toggleContactInfo}>Contact</button>}
+                        ? <div>
+                            <p>Phone: {phoneNumber}</p>
+                            <p>Other info: {contactInfo}</p>
+                        </div>
+                        : <button className="yes-btn" onClick={this.toggleContactInfo}>Contact</button>}
                 
+                <div>
+                    {instagramUrl 
+                        ? <a href={instagramUrl}><img src="/images/instagram-logo.png" width="30px" alt=""/></a>
+                        : null} 
+                    {youtubeUrl 
+                        ? <a href={youtubeUrl}><img src="/images/youtube-logo.png" width="30px" alt=""/></a>
+                        : null}   
+                </div>     
             </main>
         )
     }

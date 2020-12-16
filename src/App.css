@@ -1,26 +1,213 @@
 html, body {
   margin: 0;
   padding: 0;
+  text-align: center;
+  background-color: rgb(210, 210, 210);
+  font-family: 'Cabin', sans-serif;
+}
+
+button {
+  font-family: 'Hind Siliguri', sans-serif;
+}
+
+input {
+  font-family: 'Hind Siliguri', sans-serif;
+}
+
+/* div, section, aside {
+  border: 1px solid black;
+} */
+
+h2 {
+  font-size: 3vw;
+}
+
+ul {
+  list-style-type: none;
+}
+
+input.search-input {
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-radius: 3px;
+  margin: 50px 80px;
+}
+
+input.search-input:focus {
+  border: 3px solid rgb(236, 28, 128);
+  box-shadow: 7px 7px 5px 0px rgba(236, 28, 128, 0.75);
+  margin: 43px 78px;
 }
 
 .App {
-  padding: 20px;;
+  padding: 20px;
 }
 
-nav.navbar { 
+.navbar { 
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   padding: 0px 20px;
-  background: #686de0; 
+  background-color: black;
+  color: white; 
 }
 
-button.navbar-button {
-  padding: 5px 20px;
-  width: 100px;
-  margin: 15px 10px;
-  border-radius: 3px;
+.profile-img {
+  border-radius: 50%;
+  border: 7px solid rgb(236, 28, 128);
+  width: 80px;
+  height: 80px;
 }
 
-#home-btn {
-  color: white;
+.profile-img img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.home-btn {
+  color: rgb(236, 28, 128);
   text-decoration: none;
 }
+
+.home-btn:hover {
+  color: white;
+}
+
+.band-card {
+  background-color: white;
+  width: 15vw;
+  padding: 20px;
+  margin: 20px;
+  border: 2px solid black;
+  border-radius: 7px;
+  text-align: center;
+}
+
+.band-card:hover {
+  border: 4px solid rgb(236, 28, 128);
+  box-shadow: 7px 7px 5px 0px rgba(236, 28, 128, 0.75);
+  margin: 18px 13px;
+}
+
+.search-results {
+  margin: 0 5vw 5vw;
+}
+
+.add-form {
+  padding: 50px 0;
+}
+
+.post-gig-form {
+  margin: 0 0 50px 0;
+}
+
+.yes-btn {
+  cursor: pointer;
+  position: relative;
+  width: 100px;
+  height: 40px;
+	border-radius: 5px;
+	line-height: 2.5rem;
+	font-weight: bold;
+	
+	border: 1px solid black;
+	background-image: linear-gradient(-180deg, #FF89D6 0%, rgb(236, 28, 128));
+	box-shadow: 0 1rem 1.25rem 0 black,
+							0 -0.25rem 1.5rem  rgb(236, 28, 128) inset,
+							0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
+							0 0.25rem 0.5rem 0 rgba(180, 70, 207, 1) inset; 
+}
+
+.yes-btn::before {
+	content: "";
+	display: block;
+	left: 50%;
+	transform: translateX(-50%);
+	background: #fff;
+	border-radius: 100%;
+	
+	opacity: 0.7;
+	background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
+}
+
+.yes-btn::after {
+	content: "";
+	display: block;
+	position: absolute;
+	transform: translateX(-50%);
+	background: #fff;
+	border-radius: 100%;
+	
+	filter: blur(1px);
+	opacity: 0.05;
+	background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.gig-card {
+  width: 250px;
+  margin: 35px 50px 50px 25px;
+  text-align: center;
+  border-radius: 7px;
+  line-height: 1.2em;
+  font-family: 'Gochi Hand', cursive;
+}
+
+.gig-card button {
+  margin-top: 30px;
+}
+
+.sticky-note {
+  width: 350px;
+  height: 339px;
+  background-image: url("https://res.cloudinary.com/dzzmsb8wl/image/upload/v1608129373/km-zero-bands-storage/SN5_bqfjrg.png");
+  background-repeat: no-repeat;
+}
+
+.gig-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#nav-links h2 {
+  margin: 0 50px;
+}
+
+#band-search {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#band-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  line-height: 1em;
+}
+
+
+
+

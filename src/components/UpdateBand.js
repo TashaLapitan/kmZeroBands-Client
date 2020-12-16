@@ -45,7 +45,7 @@ function UpdateBand (props) {
                 <label>If yes, how many days would you need to rehearse a new song? </label> <br/>
                 <input type="number" name="minNoticePeriod" value={minNoticePeriod} onChange={handleBandChange}></input><br/>
 
-                <button type="submit">Publish</button>
+                <button className="yes-btn" type="submit">Publish</button>
             </form>
             <button onClick={updateBand}>Cancel</button>
             {bandExists 

@@ -165,7 +165,7 @@ class MyProfile extends Component {
         <main>
           <div>
               {this.state.user.image 
-              ? <img src={this.state.user.image} alt=""/>
+              ? <img src={this.state.user.image} width="100px" alt=""/>
               : <img src="/images/profile-image-placeholder.png" width="40px" alt=""/>}
           </div>
           <div>
@@ -189,7 +189,7 @@ class MyProfile extends Component {
           : !this.state.updateBand
             ? <div>
                 <p>You haven't published a band yet</p>
-                <button onClick={this.updateBand}>Add a band</button>
+                <button className="yes-btn" onClick={this.updateBand}>Add a band</button>
               </div>
             : <UpdateBand band={this.state.user.band} updateBand={this.updateBand} handleBandImgUpload={this.handleBandImgUpload} handleBandFormSubmit={this.handleBandFormSubmit} handleBandChange={this.handleBandChange}></UpdateBand> 
           }        

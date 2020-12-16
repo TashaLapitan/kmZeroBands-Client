@@ -136,23 +136,21 @@ class GigCard extends Component {
         }
         
         const {title, city, date, durationHours, pricePerHour, genre, description, _id} = this.state.gig;
-        const {username, phoneNumber} = this.state.gigAuthor;
+        const {username} = this.state.gigAuthor;
 
         return (
-            <section>
+            <div className="sticky-note">
                 {!this.state.canEditGig
-                ?   <div>
-                        <h2>{title}</h2>
-                        <ul>
-                            <li>{city}</li>
-                            <li>{formatDate(date)}</li>
-                            <li>{durationHours} hours</li>
-                            <li>{pricePerHour}€ per hour</li>
-                            <li>{genre}</li>
-                        </ul>
-                        <p>{description}</p>
-                        <p>Posted by: {username}</p>
-                        <p>Contact: {phoneNumber}</p>
+                ?   <div className="gig-card">
+                        <h3>{title}</h3>
+                        <span>{city}</span> <br/>
+                        <span>{formatDate(date)}</span> <br/>
+                        <span>{durationHours} hours</span> <br/>
+                        <span>{pricePerHour}€ per hour</span> <br/>
+                        <span>{genre}</span> <br/>
+                        <span>{description}</span> <br/>
+                        <span>Posted by: {username}</span> <br/>
+                        {/* <p>Contact: {phoneNumber}</p> */}
 
                         {this.props.user && this.props.user.isBandPOC === true && this.props.user._id !== this.state.gigAuthor._id
                         ? <div>
@@ -160,22 +158,19 @@ class GigCard extends Component {
                                 ? <form onSubmit={(e) => {this.handleGigResponse(e)}}>
                                     <label>Your message: </label> 
                                     <input type="text" name="comment" value={this.state.comment} onChange={(e) => {this.handleMessageInput(e)}}></input>
-                                    <button>Send</button>
+                                    <button className="yes-btn">Send</button>
                                     <button onClick={this.toggleRespond}>Discard</button>
                                 </form>
-                                : <button onClick={this.toggleRespond}>I can do it!</button>}
+                                : <button className="yes-btn" onClick={this.toggleRespond}>I can do it!</button>}
                         </div> 
                         : null}
-
                         
-
-
 
                         { this.props.user && this.props.user._id === this.state.gigAuthor._id
                         ?   <button onClick={this.toggleEditGig}>Edit</button>
                         : null}
                     </div>
-                : <div>
+                : <div className="gig-card">
                 <form onSubmit={e => this.handleSubmit(e)}>
                     <label>Title:</label>
                     <input type="text" name="title" value={title} onChange={e => this.handleChange(e)}></input>
@@ -192,12 +187,12 @@ class GigCard extends Component {
                     <label>Reward per hour:</label>
                     <input type="number" name="pricePerHour" value={pricePerHour} onChange={e => this.handleChange(e)}></input>€/hr
 
-                    <button type="submit">Save</button>
+                    <button className="yes-btn" type="submit">Save</button>
                     <button onClick={this.toggleEditGig}>Cancel</button>
                 </form>
                 <button onClick={(e)=> this.props.handleDelete(e, _id)}>Delete</button>
             </div>}
-            </section>
+                </div>
         )
     }
 }

@@ -44,7 +44,7 @@ class GigBoard extends Component {
     render() {
 
         return (
-            <div>
+            <div className="gig-section">
                 <h1>Gig Board</h1>
                 <h3>Select your city to check out current pending gigs</h3>
                 <GigSearch handleSearchSubmit={this.handleSearchSubmit} 

@@ -119,10 +119,9 @@ class Home extends Component {
 
   render() {
     return (
-      <div> 
+      <> 
          <main>
            <section>
-            <h2>Search for a band in your area</h2>
               <BandSearch handleChange={this.handleChange}
                   handleSearchSubmit={this.handleSearchSubmit}
                   bandSearch={this.state.bandSearch}
@@ -132,14 +131,14 @@ class Home extends Component {
             {this.state.showSearchResults 
             ? <div>
                 {this.state.searchBandRes.length === 0 
-                ? <div><p>Sorry, no results. But why don't you... </p></div>            
-                : <div>
+                ? <div><h3>Sorry, no results. But why don't you... </h3></div>            
+                : <div className="search-results">
                     {this.state.searchBandRes.map((bandObj) => {
                       return <BandCard key={bandObj._id} band={bandObj}/>
                     })}
                   </div>}
               </div>
-            : <div>
+            : <div className="search-results">
                 {this.state.bandsToDisplay.map((bandObj) => {
                   return <BandCard key={bandObj._id} band={bandObj}/>
                 })}
@@ -148,26 +147,23 @@ class Home extends Component {
            </section>
 
           {this.props.isLoggedIn && this.state.showAddGig
-            ? <div>
-                  <PostNewGig toggleAddGig={this.toggleAddGig} getGigs={this.getGigs}/>
-                  <button onClick={this.toggleAddGig}>Discard</button>
-              </div>
+            ? <PostNewGig toggleAddGig={this.toggleAddGig} getGigs={this.getGigs}/>
             : this.props.isLoggedIn && !this.state.showAddGig
-              ? <div>
-                  <p>Publish your own gig and receive offers from your local musicians!</p>
-                  <button onClick={this.toggleAddGig}>Post a gig</button>
+              ? <div className="post-gig-form">
+                  <h2>Publish your own gig and receive offers from your local musicians!</h2>
+                  <button className="yes-btn" onClick={this.toggleAddGig}>Post a gig</button>
                 </div>
-              :  <div>
-                    <p>Publish your own gig and receive offers from your local musicians!</p>
-                    <Link to='/login'><button>Post a gig</button></Link>
+              :  <div className="post-gig-form">
+                    <h2>Publish your own gig and receive offers from your local musicians!</h2>
+                    <Link to='/login'><button className="yes-btn">Post a gig</button></Link>
                   </div>}
          </main>
-         <section>
-           {this.state.gigsArr.map((gig, i) => {
+         <section className="gig-section">
+           {this.state.gigsArr.map((gig) => {
               return <GigCard key={gig._id} gig={gig} user={this.props.user}/>
              })}
          </section>
-       </div>
+       </>
     )
   }
 }

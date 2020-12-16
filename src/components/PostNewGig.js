@@ -53,7 +53,7 @@ class PostNewGig extends Component {
                 <label>How much do you offer?</label> <br/>
                 <input type="number" min="0" name="pricePerHour" value={this.state.pricePerHour} onChange={(e) => this.handleInput(e)}/><span> € per hour</span> <br/>
                 <button className="yes-btn" type="submit">Post my gig!</button>
-                <button onClick={this.props.toggleAddGig}>Discard</button>
+                <button className="no-btn" onClick={this.props.toggleAddGig}>Discard</button>
             </form>
         )
     }

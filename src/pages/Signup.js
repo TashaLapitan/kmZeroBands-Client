@@ -23,18 +23,18 @@ class Signup extends Component {
       <div>
         <h1>Sign Up</h1>
 
-        <form onSubmit={this.handleFormSubmit}>
+        <form onSubmit={this.handleFormSubmit} className="auth-form">
 
-          <label>Username:</label>
-          <input type="text" name="username" value={username} onChange={this.handleChange} />
+          <label>Username:</label> <br/>
+          <input type="text" name="username" value={username} onChange={this.handleChange} required/> <br/>
 
-          <label>Email:</label>
-          <input type="text" name="email" value={email} onChange={this.handleChange} />
+          <label>Email:</label> <br/>
+          <input type="email" name="email" value={email} onChange={this.handleChange} required/> <br/>
 
-          <label>Password:</label>
-          <input type="password" name="password" value={password} onChange={this.handleChange} />
+          <label>Password:</label> <br/>
+          <input type="password" name="password" value={password} onChange={this.handleChange} required/> <br/>
 
-          <input type="submit" value="Signup" />
+          <button className="yes-btn" type="submit">Signup</button>
         </form>
         
         <p>Already have account?</p>

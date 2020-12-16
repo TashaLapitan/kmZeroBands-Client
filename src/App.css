@@ -10,13 +10,11 @@ button {
   font-family: 'Hind Siliguri', sans-serif;
 }
 
-input {
+input, textarea {
   font-family: 'Hind Siliguri', sans-serif;
-}
-
-/* div, section, aside {
   border: 1px solid black;
-} */
+  border-radius: 3px;
+}
 
 h2 {
   font-size: 3vw;
@@ -33,7 +31,7 @@ input.search-input {
   margin: 50px 80px;
 }
 
-input.search-input:focus {
+input.search-input:focus  {
   border: 3px solid rgb(236, 28, 128);
   box-shadow: 7px 7px 5px 0px rgba(236, 28, 128, 0.75);
   margin: 43px 78px;
@@ -76,19 +74,21 @@ input.search-input:focus {
 }
 
 .band-card {
-  background-color: white;
+  background-color: black;
+  color: white;
   width: 15vw;
   padding: 20px;
   margin: 20px;
   border: 2px solid black;
   border-radius: 7px;
   text-align: center;
+  font-weight: bold;
 }
 
 .band-card:hover {
   border: 4px solid rgb(236, 28, 128);
   box-shadow: 7px 7px 5px 0px rgba(236, 28, 128, 0.75);
-  margin: 18px 13px;
+  margin: 16px 13px;
 }
 
 .search-results {
@@ -145,6 +145,23 @@ input.search-input:focus {
 	background-image: linear-gradient(-270deg, rgba(255,255,255,0.00) 0%, #FFFFFF 20%, #FFFFFF 80%, rgba(255,255,255,0.00) 100%);
 }
 
+.no-btn {
+  cursor: pointer;
+  position: relative;
+  width: 100px;
+  height: 40px;
+	border-radius: 5px;
+	line-height: 2.5rem;
+	font-weight: bold;
+	
+	border: 1px solid black;
+  background-image: linear-gradient(-180deg,  rgba(255,255,255, 0.4)0%,gray);
+	box-shadow: 0 1rem 1.25rem 0 black,
+							0 -0.25rem 1.5rem slategray inset,
+							0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
+							0 0.25rem 0.5rem 0 slateblue inset; 
+}
+
 .nav-links {
   display: flex;
   flex-direction: row;
@@ -156,9 +173,12 @@ input.search-input:focus {
   margin: 35px 50px 50px 25px;
   text-align: center;
   border-radius: 7px;
-  line-height: 1.2em;
-  font-family: 'Gochi Hand', cursive;
+  line-height: 0.8em;
+  font-family: 'Reenie Beanie', cursive;
+  font-size: 2.5vw;
 }
+
+/* do something about gig card */
 
 .gig-card button {
   margin-top: 30px;
@@ -178,8 +198,26 @@ input.search-input:focus {
   flex-wrap: wrap;
 }
 
+.medialinks {
+  width: 200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
 
+.custom-pl-flag {
+  background-color: rgba(236, 28, 128, 0.6);
+  padding: 10px;
+}
 
+.auth-form input:focus {
+  border: 3px solid rgb(236, 28, 128);
+  box-shadow: 7px 7px 5px 0px rgba(236, 28, 128, 0.75);
+}
+
+.auth-form button {
+  margin: 50px 0;
+}
 
 
 
@@ -206,6 +244,14 @@ input.search-input:focus {
   flex-direction: row;
   justify-content: space-evenly;
   line-height: 1em;
+}
+
+#update-band-form input {
+  margin: 10px 0;
+}
+
+#update-band-form button {
+  margin: 30px 0;
 }
 
 

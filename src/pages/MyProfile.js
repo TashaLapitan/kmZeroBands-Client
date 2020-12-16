@@ -52,6 +52,7 @@ class MyProfile extends Component {
     const { username, image, phoneNumber, aboutBio } = this.state.user;
     userService.editUser(username, image, phoneNumber, aboutBio)
       .then(() => {
+        this.props.updateMe();
         this.toggleEditProfile();
       })    
   };
@@ -114,7 +115,6 @@ class MyProfile extends Component {
       .then((response) => {
         console.log("response is: ", response);
         this.setState({ user: {...this.state.user, band: {...this.state.user.band, image: response.data.secure_url} }});
-        // console.log('IMAGE IN STATE AFTER SET STATE BEFORE EDIT PROFILE: ', this.state.user.image)
       })
       .catch((err) => {
         console.log("Error while uploading the file: ", err);
@@ -183,7 +183,7 @@ class MyProfile extends Component {
           ? !this.state.updateBand
             ? <div>
               <BandInfo band={this.state.user.band}/>
-              <button onClick={this.updateBand}>Edit band</button>
+              <button className="no-btn" onClick={this.updateBand}>Edit band</button>
               </div>
             : <UpdateBand band={this.state.user.band} updateBand={this.updateBand} handleBandImgUpload={this.handleBandImgUpload} handleBandFormSubmit={this.handleBandFormSubmit} handleBandChange={this.handleBandChange} deleteBand={this.deleteBand} bandExists={this.state.user.isBandPOC}></UpdateBand> 
           : !this.state.updateBand

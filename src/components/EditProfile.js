@@ -19,7 +19,7 @@ function EditProfile (props) {
                     <input type="text" name="phoneNumber" value={phoneNumber} onChange={(e) => handleChange(e)}/>
                     <label>About me</label>
                     <textarea rows="4" cols="50" name="aboutBio" value={aboutBio} placeholder="More info about you" onChange={(e) => handleChange(e)}/>
-                    <input type="submit" value="Update Info"/>
+                    <input className="yes-btn" type="submit" value="Update Info"/>
                 </form>
             )
     }

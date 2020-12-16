@@ -23,21 +23,21 @@ class Login extends Component {
     const { email, password } = this.state;
 
     return (
-      <div>
+      <div style={{height: "52vh"}}>
         <h1>Login</h1>
 
-        <form onSubmit={this.handleFormSubmit}>
+        <form onSubmit={this.handleFormSubmit} className="auth-form">
           
-          <label>Email:</label>
-          <input type="text" name="email" value={email} onChange={this.handleChange}/>
+          <label>Email:</label> <br/>
+          <input type="text" name="email" value={email} onChange={this.handleChange} required/> <br/>
 
-          <label>Password:</label>
-          <input type="password" name="password" value={password} onChange={this.handleChange} />
+          <label>Password:</label> <br/>
+          <input type="password" name="password" value={password} onChange={this.handleChange} required/> <br/>
 
-          <input type="submit" value="Login" />
+          <button className="yes-btn" type="submit">Login</button>
         </form>
         <p>Don't have an account yet?</p>
-        <Link to={"/signup"}>Create account</Link>
+        <Link to={"/signup"}>Let's get you signed up!</Link>
       </div>
     );
   }

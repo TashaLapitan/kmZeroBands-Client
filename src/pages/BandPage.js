@@ -59,12 +59,12 @@ class BandPage extends Component {
                         </ul>
                         <p>{description}</p>
                         <p>Managed by {pocID.username}</p>
-                        <p><span>Usual price: {pricePerHour}€ per hour of performance</span></p>
+                        <p>Usual price: {pricePerHour}€ per hour of performance</p>
                         {canCustomizePlaylist
-                        ?   <p> 
+                        ?   <p className="custom-pl-flag"> 
                                 {title} can play a song of your choice <br/>given a minimum of {minNoticePeriod} days notice, how cool is that!
                             </p>
-                        : <p>
+                        : <p className="custom-pl-flag">
                             {title} prefer to stick to their own well-rehearsed repertoire <br/>and do not accept custom orders
                         </p> }
                     </div>
@@ -74,9 +74,9 @@ class BandPage extends Component {
                             <p>Phone: {phoneNumber}</p>
                             <p>Other info: {contactInfo}</p>
                         </div>
-                        : <button className="yes-btn" onClick={this.toggleContactInfo}>Contact</button>}
+                        : <button className="yes-btn" onClick={this.toggleContactInfo} style={{margin: "50px 0"}}>Contact</button>}
                 
-                <div>
+                <div className="medialinks">
                     {instagramUrl 
                         ? <a href={instagramUrl}><img src="/images/instagram-logo.png" width="30px" alt=""/></a>
                         : null} 

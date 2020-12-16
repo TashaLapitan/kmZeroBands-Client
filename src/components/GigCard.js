@@ -21,7 +21,7 @@ class GigCard extends Component {
         },
         canEditGig: false,
         canRespond: false,
-        comment: ""
+        comment: "",
     }
 
     handleChange = (event) => {
@@ -139,7 +139,7 @@ class GigCard extends Component {
         const {username} = this.state.gigAuthor;
 
         return (
-            <div className="sticky-note">
+            <div className={this.props.className}>
                 {!this.state.canEditGig
                 ?   <div className="gig-card">
                         <h3>{title}</h3>
@@ -150,7 +150,6 @@ class GigCard extends Component {
                         <span>{genre}</span> <br/>
                         <span>{description}</span> <br/>
                         <span>Posted by: {username}</span> <br/>
-                        {/* <p>Contact: {phoneNumber}</p> */}
 
                         {this.props.user && this.props.user.isBandPOC === true && this.props.user._id !== this.state.gigAuthor._id
                         ? <div>
@@ -159,7 +158,7 @@ class GigCard extends Component {
                                     <label>Your message: </label> 
                                     <input type="text" name="comment" value={this.state.comment} onChange={(e) => {this.handleMessageInput(e)}}></input>
                                     <button className="yes-btn">Send</button>
-                                    <button onClick={this.toggleRespond}>Discard</button>
+                                    <button className="no-btn" onClick={this.toggleRespond}>Discard</button>
                                 </form>
                                 : <button className="yes-btn" onClick={this.toggleRespond}>I can do it!</button>}
                         </div> 
@@ -167,7 +166,7 @@ class GigCard extends Component {
                         
 
                         { this.props.user && this.props.user._id === this.state.gigAuthor._id
-                        ?   <button onClick={this.toggleEditGig}>Edit</button>
+                        ?   <button className="no-btn" onClick={this.toggleEditGig}>Edit</button>
                         : null}
                     </div>
                 : <div className="gig-card">
@@ -188,9 +187,9 @@ class GigCard extends Component {
                     <input type="number" name="pricePerHour" value={pricePerHour} onChange={e => this.handleChange(e)}></input>€/hr
 
                     <button className="yes-btn" type="submit">Save</button>
-                    <button onClick={this.toggleEditGig}>Cancel</button>
+                    <button className="no-btn" onClick={this.toggleEditGig}>Cancel</button>
                 </form>
-                <button onClick={(e)=> this.props.handleDelete(e, _id)}>Delete</button>
+                <button className="no-btn" onClick={(e)=> this.props.handleDelete(e, _id)}>Delete</button>
             </div>}
                 </div>
         )

@@ -51,7 +51,7 @@ class ProfileInfo extends Component {
                         </tr>
                     </tbody>
                 </table>
-                <button onClick={this.props.toggleEditProfile}>Edit Profile</button>
+                <button className="no-btn" onClick={this.props.toggleEditProfile}>Edit Profile</button>
                 <div>
                     <h2>My pending gigs: </h2>
                     {myGigs

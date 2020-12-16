@@ -42,9 +42,9 @@ class Home extends Component {
           const gigDate = new Date(gig.date)
           if (gigDate >= dateToday) 
           {pendingGigs.push(gig)}});
-        const tenGigs = pendingGigs.slice(0,10)
+        const fiveGigs = pendingGigs.slice(0,5)
         
-        this.setState({gigsArr: tenGigs})
+        this.setState({gigsArr: fiveGigs})
       })
   }
 
@@ -72,11 +72,11 @@ class Home extends Component {
     bandService.getAllBands()
       .then(response => {
         let allBands = response.data;
-        if (allBands.length <= 10) {
+        if (allBands.length <= 5) {
           this.setState({bandsToDisplay: allBands, allBands, searchBandRes: allBands})
         } else {
           let tenRandBands = [];
-          for (let i=0; i<10; i++) {
+          for (let i=0; i<5; i++) {
             const index = Math.floor(Math.random() * allBands.length);
             tenRandBands.push(allBands[index])
           }
@@ -160,7 +160,7 @@ class Home extends Component {
          </main>
          <section className="gig-section">
            {this.state.gigsArr.map((gig) => {
-              return <GigCard key={gig._id} gig={gig} user={this.props.user}/>
+              return <GigCard className={"sticky-note"} key={gig._id} gig={gig} user={this.props.user}/>
              })}
          </section>
        </>

@@ -5,7 +5,7 @@ function UpdateBand (props) {
     const {title, image, city, description, phoneNumber, contactInfo, instagramUrl, youtubeUrl, genre1, genre2, genre3, pricePerHour, canCustomizePlaylist, minNoticePeriod} = props.band;
     
     return (
-        <div>
+        <div id="update-band-form">
             <img src={image} alt=""/>
             <form onSubmit={(e) => handleBandFormSubmit(e)}>
                 <label>Band Photo: </label>
@@ -30,7 +30,7 @@ function UpdateBand (props) {
                 <input type="text" name="youtubeUrl" value={youtubeUrl} onChange={handleBandChange}/> <br/>
                 <label>How much do you charge hourly? </label> <br/>
                 <input type="number" name="pricePerHour" value={pricePerHour} onChange={handleBandChange}/> <br/>
-                <p>Would you tailor your playlist to client's request? </p> <br/>
+                <label>Would you tailor your playlist to client's request? </label> <br/>
                 <label>Sure </label> 
                 {canCustomizePlaylist 
                 ? <input type="radio" name="canCustomizePlaylist" value="true" checked="checked" onChange={handleBandChange}/>
@@ -45,7 +45,7 @@ function UpdateBand (props) {
                 <label>If yes, how many days would you need to rehearse a new song? </label> <br/>
                 <input type="number" name="minNoticePeriod" value={minNoticePeriod} onChange={handleBandChange}></input><br/>
 
-                <button className="yes-btn" type="submit">Publish</button>
+                <button className="yes-btn" type="submit">Save</button>
             </form>
             <button onClick={updateBand}>Cancel</button>
             {bandExists 

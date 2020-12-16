@@ -12,9 +12,13 @@ class AuthProvider extends React.Component {
   }
 
   componentDidMount () {
+    this.updateMe();
+  }
+
+  updateMe = () => {
     authService.me()
-     .then((user) => this.setState({ isLoggedIn: true, user: user, isLoading: false }))
-     .catch((err) => this.setState({ isLoggedIn: false, user: null, isLoading: false }));
+    .then((user) => this.setState({ isLoggedIn: true, user: user, isLoading: false }))
+    .catch((err) => this.setState({ isLoggedIn: false, user: null, isLoading: false }));
   }
 
   signup = (username, email, password) => {
@@ -44,12 +48,12 @@ class AuthProvider extends React.Component {
 
   render() {
     const { isLoggedIn, isLoading, user } = this.state;
-    const { signup, login, logout } = this;
+    const { signup, login, logout, updateMe } = this;
 
     if (isLoading) return <p>Loading</p>;
 
     return(
-      <Provider value={{ isLoggedIn, isLoading, user, signup, login, logout }}  >
+      <Provider value={{ isLoggedIn, isLoading, user, updateMe, signup, login, logout }}  >
         {this.props.children}
       </Provider>
     )
@@ -66,7 +70,7 @@ const withAuth = (WrappedComponent) => {
       return(
         <Consumer>
           { (value) => {
-            const { isLoggedIn, isLoading, user, signup, login, logout } = value;
+            const { isLoggedIn, isLoading, user, signup, login, logout, updateMe } = value;
 
             return (<WrappedComponent 
                       {...this.props}
@@ -76,6 +80,7 @@ const withAuth = (WrappedComponent) => {
                       signup={signup} 
                       login={login} 
                       logout={logout}
+                      updateMe={updateMe}
                     />)
 
           } }

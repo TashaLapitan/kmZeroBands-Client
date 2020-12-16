@@ -6,7 +6,7 @@ function UpdateBand (props) {
     
     return (
         <div id="update-band-form">
-            <img src={image} alt=""/>
+            <img src={image} alt="" style={{width: "400px"}}/>
             <form onSubmit={(e) => handleBandFormSubmit(e)}>
                 <label>Band Photo: </label>
                 <input type="file" onChange={(e)=> handleBandImgUpload(e)}></input> <br/>
@@ -47,9 +47,9 @@ function UpdateBand (props) {
 
                 <button className="yes-btn" type="submit">Save</button>
             </form>
-            <button onClick={updateBand}>Cancel</button>
+            <button className="no-btn" onClick={updateBand}>Cancel</button>
             {bandExists 
-            ? <button onClick={deleteBand}>Delete Band</button>
+            ? <button className="no-btn" onClick={deleteBand}>Delete Band</button>
             : null
             }
         </div>

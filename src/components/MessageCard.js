@@ -31,14 +31,14 @@ class MessageCard extends Component {
     render() {
         if (this.state.band.title !== "" && this.state.gigTitle !== "" && this.state.band.endpoint !== "") {
             return (
-                <div>
+                <div className="msg-card">
                     <p>{this.state.band.title} showed interest in {this.state.gigTitle}:</p>
                     <p>{this.state.comment}</p>
-                    <Link to={this.state.band.endpoint} target="_blank"><button className="yes-btn">Contact them!</button></Link>
+                    <Link to={this.state.band.endpoint} target="_blank"><button className="yes-btn">Contact</button></Link>
                 </div>
             )
         } else {
-            return <div></div>
+            return <></>
         }
         
     }

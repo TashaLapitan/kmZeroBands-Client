@@ -9,7 +9,7 @@ function BandCard (props) {
             <h3>{title}</h3>
             <p>{city}</p>
             <img src={image} alt="" width="200px"/>
-            <aside style={{ display:"flex", alignItems: "center"}}>
+            <aside style={{ display:"flex", alignItems: "center", justifyContent: "space-between"}}>
                 <div style={{padding: "0 15px", textAlign: "center"}}>
                         {genres.map(genre => {
                             return <p key={genre}>{genre}</p>

@@ -121,7 +121,7 @@ class MyProfile extends Component {
       });
   }
 
-  deleteProfile = () => {
+  deleteProfile = (event) => {
     const id = this.props.user._id;
     userService.deleteUser(id);
   }
@@ -161,21 +161,26 @@ class MyProfile extends Component {
   render() {
     return (
       <div>
-        <h1>{this.state.user && this.state.user.username}</h1>
-        <main>
+          <h1>{this.state.user && this.state.user.username}</h1>
           <div>
               {this.state.user.image 
               ? <img src={this.state.user.image} width="100px" alt=""/>
               : <img src="/images/profile-image-placeholder.png" width="40px" alt=""/>}
           </div>
+          <main id="left-profile-section">
           <div>
               {!this.state.editProfile 
-              ? <ProfileInfo user={this.state.user} toggleEditProfile={this.toggleEditProfile} setComponentState={this.setComponentState}/>
-              : 
-              <EditProfile user={this.state.user} handleProfileFormSubmit={this.handleProfileFormSubmit} handleChange={this.handleChange} handleFileUpload={this.handleFileUpload}/>
+              ? <ProfileInfo user={this.state.user} 
+                toggleEditProfile={this.toggleEditProfile} 
+                setComponentState={this.setComponentState} 
+                deleteProfile={this.deleteProfile}/>
+              : <EditProfile user={this.state.user} 
+                handleProfileFormSubmit={this.handleProfileFormSubmit} 
+                handleChange={this.handleChange} 
+                handleFileUpload={this.handleFileUpload}/>
               }
           </div>
-        </main>
+        
         <section>
           <h2>My band</h2>
           <div>
@@ -185,19 +190,30 @@ class MyProfile extends Component {
               <BandInfo band={this.state.user.band}/>
               <button className="no-btn" onClick={this.updateBand}>Edit band</button>
               </div>
-            : <UpdateBand band={this.state.user.band} updateBand={this.updateBand} handleBandImgUpload={this.handleBandImgUpload} handleBandFormSubmit={this.handleBandFormSubmit} handleBandChange={this.handleBandChange} deleteBand={this.deleteBand} bandExists={this.state.user.isBandPOC}></UpdateBand> 
+            : <UpdateBand band={this.state.user.band} 
+              updateBand={this.updateBand} 
+              handleBandImgUpload={this.handleBandImgUpload} 
+              handleBandFormSubmit={this.handleBandFormSubmit} 
+              handleBandChange={this.handleBandChange} 
+              deleteBand={this.deleteBand} 
+              bandExists={this.state.user.isBandPOC}></UpdateBand> 
           : !this.state.updateBand
             ? <div>
                 <p>You haven't published a band yet</p>
                 <button className="yes-btn" onClick={this.updateBand}>Add a band</button>
               </div>
-            : <UpdateBand band={this.state.user.band} updateBand={this.updateBand} handleBandImgUpload={this.handleBandImgUpload} handleBandFormSubmit={this.handleBandFormSubmit} handleBandChange={this.handleBandChange}></UpdateBand> 
+            : <UpdateBand band={this.state.user.band} 
+              updateBand={this.updateBand} 
+              handleBandImgUpload={this.handleBandImgUpload} 
+              handleBandFormSubmit={this.handleBandFormSubmit} 
+              handleBandChange={this.handleBandChange}>
+              </UpdateBand> 
           }        
           </div>
         </section>
-        
+        </main>
         <aside>
-          {/* <Link to={'/'} onClick={this.deleteProfile}>Delete Profile</Link> */}
+          
         </aside>
       </div>
     );

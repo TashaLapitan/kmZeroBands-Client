@@ -43,7 +43,8 @@ class PostNewGig extends Component {
                 <label>Description: </label> <br/>
                 <textarea rows="4" cols="50" name="description" 
                     value={this.state.description}
-                    placeholder="Ex.: Looking for a guitar player to join us at the beach"
+                    maxLength="40"
+                    placeholder="Ex.: Looking for a guitar player"
                     onChange={(e) => this.handleInput(e)}>
                 </textarea> <br/>
                 <label>Which music genre best describes your gig? </label> <br/>

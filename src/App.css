@@ -76,7 +76,7 @@ input.search-input:focus  {
 .band-card {
   background-color: black;
   color: white;
-  width: 15vw;
+  width: 200px;
   padding: 20px;
   margin: 20px;
   border: 2px solid black;
@@ -88,11 +88,15 @@ input.search-input:focus  {
 .band-card:hover {
   border: 4px solid rgb(236, 28, 128);
   box-shadow: 7px 7px 5px 0px rgba(236, 28, 128, 0.75);
-  margin: 16px 13px;
+  margin: 18px 18px;
 }
 
 .search-results {
   margin: 0 5vw 5vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .add-form {
@@ -172,16 +176,15 @@ input.search-input:focus  {
   width: 250px;
   margin: 35px 50px 50px 25px;
   text-align: center;
-  border-radius: 7px;
-  line-height: 0.8em;
-  font-family: 'Reenie Beanie', cursive;
-  font-size: 2.5vw;
+  border-radius: 7px;  
 }
-
-/* do something about gig card */
 
 .gig-card button {
   margin-top: 30px;
+}
+
+.gig-card h3 {
+  margin-bottom: 10px;
 }
 
 .sticky-note {
@@ -189,6 +192,9 @@ input.search-input:focus  {
   height: 339px;
   background-image: url("https://res.cloudinary.com/dzzmsb8wl/image/upload/v1608129373/km-zero-bands-storage/SN5_bqfjrg.png");
   background-repeat: no-repeat;
+  font-family: 'Reenie Beanie', cursive;
+  font-size: 2.5vw;
+  line-height: 0.8em;
 }
 
 .gig-section {
@@ -219,7 +225,28 @@ input.search-input:focus  {
   margin: 50px 0;
 }
 
+.gig-plain-card {
+  font-family: 'Cabin', sans-serif;
+  font-size: 1vw;
+  line-height: 1em;
+  width: 320px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 
+.gig-plain-card div {
+  border: 1px solid black;
+  width: 150px;
+  margin: 10px 0;
+}
+
+.msg-card {
+  border: 1px solid black;
+  border-radius: 7px;
+  width: 150px;
+  margin: 10px;
+}
 
 
 
@@ -252,6 +279,12 @@ input.search-input:focus  {
 
 #update-band-form button {
   margin: 30px 0;
+}
+
+#left-profile-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 

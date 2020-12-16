@@ -6,7 +6,7 @@ function BandInfo(props) {
 
     return (
         <div>
-            <img src={image} alt=""/>
+            <img src={image} alt="" style={{width: "400px"}}/>
             <table>
                 <thead>
                     <tr>

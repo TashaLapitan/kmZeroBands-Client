@@ -75,15 +75,11 @@ class Home extends Component {
         if (allBands.length <= 5) {
           this.setState({bandsToDisplay: allBands, allBands, searchBandRes: allBands})
         } else {
-          let tenRandBands = [];
-          for (let i=0; i<5; i++) {
-            const index = Math.floor(Math.random() * allBands.length);
-            tenRandBands.push(allBands[index])
+          const fiveRandomBands = allBands.split(0,5);
+          this.setState({bandsToDisplay: fiveRandomBands, allBands, searchBandRes: allBands})
           }
-          this.setState({bandsToDisplay: tenRandBands, allBands, searchBandRes: allBands})
         }
-      })
-  }
+      )}
 
   filterBand = (name, str) => {
     let newArr = [];

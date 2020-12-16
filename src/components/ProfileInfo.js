@@ -5,7 +5,6 @@ import gigService from './../lib/gig-service';
 
 class ProfileInfo extends Component {
 
-
     handleDelete = (event, id) => {
         event.preventDefault();
         gigService.deleteGig(id)
@@ -52,6 +51,16 @@ class ProfileInfo extends Component {
                     </tbody>
                 </table>
                 <button className="no-btn" onClick={this.props.toggleEditProfile}>Edit Profile</button>
+                <aside>
+                    <h2>My notifications: </h2>
+                    {allMessages.length > 0
+                    ? <div style={{display: "flex", flexDirection: "row", flexWrap: "wrap", width: "345px"}}>
+                        {allMessages.map(message => {
+                            return <MessageCard key={message._id} message={message}/>
+                        })}
+                    </div>
+                    : <p>You haven't received any resposes yet</p>}
+                </aside>
                 <div>
                     <h2>My pending gigs: </h2>
                     {myGigs
@@ -60,21 +69,14 @@ class ProfileInfo extends Component {
                         const gigDate = new Date(gig.date);
                         if (gigDate >= today) {
                             return  <div  key={gig._id}>
-                                        <GigCard gig={gig} handleDelete={this.handleDelete} user={this.props.user}/>
+                                        <GigCard className={"gig-plain-card"} gig={gig} 
+                                        handleDelete={this.handleDelete} 
+                                        user={this.props.user}/>
                                     </div>
                         }})
                     : <p>You haven't posted any gigs yet</p>}
                 </div>
-                <aside>
-                    <h2>My notifications: </h2>
-                    {allMessages.length > 0
-                    ? <div>
-                        {allMessages.map(message => {
-                            return <MessageCard key={message._id} message={message}/>
-                        })}
-                    </div>
-                    : <p>You haven't received any resposes yet</p>}
-                </aside>
+                
             </section>
         )
     }

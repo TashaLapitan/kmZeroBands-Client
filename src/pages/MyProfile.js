@@ -150,6 +150,7 @@ class MyProfile extends Component {
         band.genre2 = band.genres[1];
         band.genre3 = band.genres[2];
         this.setState({user: {username, image, dateOfBirth, phoneNumber, aboutBio, isBandPOC, band, gigHistory}});
+        console.log('this.state.user.band', this.state.user.band)
       }
     })
   }
@@ -181,7 +182,7 @@ class MyProfile extends Component {
               }
           </div>
         
-        <section>
+        <section id="right-profile-section">
           <h2>My band</h2>
           <div>
           { this.state.user.isBandPOC 

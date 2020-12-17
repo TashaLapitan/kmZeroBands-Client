@@ -50,7 +50,7 @@ class BandPage extends Component {
                 <h1>{title}</h1>
                 <h3>{city}</h3>
                 <secion id="band-container">
-                    <img src={image} alt=""/>
+                    <img src={image} alt="" width="450"/>
                     <div>
                         <ul>
                             {genres.map(genre => {

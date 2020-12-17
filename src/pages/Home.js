@@ -76,6 +76,7 @@ class Home extends Component {
           this.setState({bandsToDisplay: allBands, allBands, searchBandRes: allBands})
         } else {
           const fiveRandomBands = allBands.split(0,5);
+          console.log(fiveRandomBands)
           this.setState({bandsToDisplay: fiveRandomBands, allBands, searchBandRes: allBands})
           }
         }

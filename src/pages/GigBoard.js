@@ -44,19 +44,19 @@ class GigBoard extends Component {
     render() {
 
         return (
-            <div className="gig-section">
+            <div>
                 <h1>Gig Board</h1>
                 <h3>Select your city to check out current pending gigs</h3>
                 <GigSearch handleSearchSubmit={this.handleSearchSubmit} 
                     handleChange={this.handleChange} 
                     gigCities={this.state.gigCities} 
                     query={this.state.query}/>
-                <section>
+                <section className="gig-section">
                     {this.state.gigsArr.map(gig => {
                         const today = new Date(Date.now());
                         const gigDate = new Date(gig.date);
                         if (gigDate >= today) {
-                            return <GigCard key={gig._id} gig={gig}/>
+                            return <GigCard className={"sticky-note"} key={gig._id} gig={gig}/>
                         } 
                     })}
 

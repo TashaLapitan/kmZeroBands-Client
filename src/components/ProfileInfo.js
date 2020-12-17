@@ -61,7 +61,7 @@ class ProfileInfo extends Component {
                     </div>
                     : <p>You haven't received any resposes yet</p>}
                 </aside>
-                <div>
+                <div style={{display: "flex", flexDirection: "row", flexWrap: "wrap", width: "345px"}}>
                     <h2>My pending gigs: </h2>
                     {myGigs
                     ? myGigs.map(gig => {

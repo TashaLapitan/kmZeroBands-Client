@@ -190,6 +190,7 @@ input.search-input:focus  {
 .sticky-note {
   width: 350px;
   height: 339px;
+  margin: 50px 0;
   background-image: url("https://res.cloudinary.com/dzzmsb8wl/image/upload/v1608129373/km-zero-bands-storage/SN5_bqfjrg.png");
   background-repeat: no-repeat;
   font-family: 'Reenie Beanie', cursive;
@@ -229,16 +230,10 @@ input.search-input:focus  {
   font-family: 'Cabin', sans-serif;
   font-size: 1vw;
   line-height: 1em;
-  width: 320px;
+  width: 150px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-}
-
-.gig-plain-card div {
-  border: 1px solid black;
-  width: 150px;
-  margin: 10px 0;
 }
 
 .msg-card {

@@ -75,7 +75,7 @@ class Home extends Component {
         if (allBands.length <= 5) {
           this.setState({bandsToDisplay: allBands, allBands, searchBandRes: allBands})
         } else {
-          const fiveRandomBands = allBands.split(0,5);
+          const fiveRandomBands = allBands.slice(0,5);
           console.log(fiveRandomBands)
           this.setState({bandsToDisplay: fiveRandomBands, allBands, searchBandRes: allBands})
           }
@@ -111,7 +111,6 @@ class Home extends Component {
     this.getGigs();
     this.getBandOptions();
     this.getAllBands();
-    
   }
 
   render() {

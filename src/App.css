@@ -243,7 +243,14 @@ input.search-input:focus  {
   margin: 10px;
 }
 
+.edit-gig {
+  font-family: 'Cabin', sans-serif;
+  font-size: 1vw;
+}
 
+#my-profile-page h2 {
+  text-align: center;
+}
 
 
 

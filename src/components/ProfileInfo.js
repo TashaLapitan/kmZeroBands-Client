@@ -27,11 +27,11 @@ class ProfileInfo extends Component {
 
         return (
             <section>
+                <h2>My Profile Info</h2>
                 <table>
                     <thead>
                         <tr>
                             <th>
-                                <h2>My Profile Info</h2>
                             </th>
                         </tr>
                     </thead>
@@ -50,7 +50,7 @@ class ProfileInfo extends Component {
                         </tr>
                     </tbody>
                 </table>
-                <button className="no-btn" onClick={this.props.toggleEditProfile}>Edit Profile</button>
+                <button className="no-btn" style={{marginTop: "30px"}} onClick={this.props.toggleEditProfile}>Edit Profile</button>
                 <aside>
                     <h2>My notifications: </h2>
                     {allMessages.length > 0
@@ -61,8 +61,8 @@ class ProfileInfo extends Component {
                     </div>
                     : <p>You haven't received any resposes yet</p>}
                 </aside>
+                <h2>My pending gigs: </h2>
                 <div style={{display: "flex", flexDirection: "row", flexWrap: "wrap", width: "345px"}}>
-                    <h2>My pending gigs: </h2>
                     {myGigs
                     ? myGigs.map(gig => {
                         const today = new Date(Date.now());

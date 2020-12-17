@@ -160,7 +160,7 @@ class MyProfile extends Component {
   
   render() {
     return (
-      <div>
+      <div id="my-profile-page">
           <h1>{this.state.user && this.state.user.username}</h1>
           <div>
               {this.state.user.image 

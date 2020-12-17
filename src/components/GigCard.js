@@ -169,22 +169,22 @@ class GigCard extends Component {
                         ?   <button className="no-btn" onClick={this.toggleEditGig}>Edit</button>
                         : null}
                     </div>
-                : <div className="gig-card">
+                : <div className="gig-card edit-gig">
                 <form onSubmit={e => this.handleSubmit(e)}>
                     <label>Title:</label>
-                    <input type="text" name="title" value={title} onChange={e => this.handleChange(e)}></input>
+                    <input type="text" name="title" value={title} onChange={e => this.handleChange(e)}></input> <br/>
                     <label>Description:</label>
-                    <input type="text" name="description" value={description} onChange={e => this.handleChange(e)}></input>
+                    <input type="text" name="description" value={description} onChange={e => this.handleChange(e)}></input> <br/>
                     <label>City:</label>
-                    <input type="text" name="city" value={city} onChange={e => this.handleChange(e)}></input>
-                    <label>Date</label>
-                    <input type="date" name="date" value={displayDateInput(date)} onChange={e => this.handleChange(e)}></input>
+                    <input type="text" name="city" value={city} onChange={e => this.handleChange(e)}></input> <br/>
+                    <label>Date</label> <br/>
+                    <input type="date" name="date" value={displayDateInput(date)} onChange={e => this.handleChange(e)}></input> <br/>
                     <label>Genre:</label>
-                    <input type="text" name="genre" value={genre} onChange={e => this.handleChange(e)}></input>
-                    <label>Duration:</label>
-                    <input type="number" name="durationHours" value={durationHours} onChange={e => this.handleChange(e)}></input><span> hours</span>
-                    <label>Reward per hour:</label>
-                    <input type="number" name="pricePerHour" value={pricePerHour} onChange={e => this.handleChange(e)}></input>€/hr
+                    <input type="text" name="genre" value={genre} onChange={e => this.handleChange(e)}></input> <br/>
+                    <label>Duration (hours):</label>
+                    <input type="number" name="durationHours" value={durationHours} onChange={e => this.handleChange(e)}></input> <br/>
+                    <label>Reward per hour (€):</label>
+                    <input type="number" name="pricePerHour" value={pricePerHour} onChange={e => this.handleChange(e)}></input><br/>
 
                     <button className="yes-btn" type="submit">Save</button>
                     <button className="no-btn" onClick={this.toggleEditGig}>Cancel</button>

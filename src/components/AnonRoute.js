@@ -2,8 +2,6 @@ import React from 'react'
 import { Route, Redirect } from 'react-router-dom';
 import { withAuth } from './../context/auth-context';
 
-// Route that only allows access to a user who is not logged in
-
 function AnonRoute (routeProps) {
   
   const { isLoggedIn, isLoading } = routeProps;

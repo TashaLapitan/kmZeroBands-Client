@@ -61,8 +61,6 @@ class AuthProvider extends React.Component {
 
 }
 
-
-// HOC that converts regular component into a Consumer
 const withAuth = (WrappedComponent) => {
   
   return class extends React.Component {

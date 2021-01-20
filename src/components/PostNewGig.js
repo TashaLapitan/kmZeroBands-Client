@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Redirect} from 'react-router-dom';
 import gigService from '../lib/gig-service';
 
 class PostNewGig extends Component {

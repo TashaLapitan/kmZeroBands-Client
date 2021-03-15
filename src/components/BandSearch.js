@@ -2,8 +2,8 @@ import React from 'react'
 
 function BandSearch (props) {
 
-    const {handleChange, handleSearchSubmit, bandCities, bandGenres} = props;
-    const {city, genre, title } = props.bandSearch;
+    const {handleChange, handleSearchSubmit, clearSearch, bandCities, bandGenres} = props;
+    const {city, genre} = props.bandSearch;
     
     return (
         <>
@@ -22,8 +22,9 @@ function BandSearch (props) {
                     return <option key={genre} value={genre}></option>
                 })}
             </datalist>
-
-            <input className="search-input" type="text" name="title" value={title} onChange={e => handleChange(e)} placeholder="Type the name of a band"></input>
+            <br/>
+            <button className="yes-btn" type="submit">Search</button>
+            <button className="no-btn" onClick={() => clearSearch()}>Clear</button>
         </form>
         </>
     )

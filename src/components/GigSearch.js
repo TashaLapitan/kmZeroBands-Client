@@ -2,7 +2,7 @@ import React from 'react'
 
 function GigSearch(props) {
 
-    const {handleChange, handleSearchSubmit, gigCities, query} = props;
+    const {handleChange, handleSearchSubmit, gigCities, query, clearSearch} = props;
     
     return (
         <form onSubmit={(e) => handleSearchSubmit(e)}>
@@ -13,6 +13,7 @@ function GigSearch(props) {
                 })}
             </datalist><br/>
             <button className="yes-btn" type="submit">Search</button>
+            <button className="no-btn" onClick={clearSearch}>Clear</button>
         </form>
     )
 }

@@ -15,7 +15,7 @@ class GigBoard extends Component {
         event.preventDefault();
         gigService.searchGigs(this.state.query)
             .then(response => {
-                this.setState({gigsArr: response.data, query: ""})
+                this.setState({gigsArr: response.data})
             })
     }
 
@@ -37,6 +37,11 @@ class GigBoard extends Component {
             })
     }
 
+    clearSearch = () => {
+        this.showAllGigs();
+        this.setState({query: ""})
+    }
+
     componentDidMount () {
         this.showAllGigs()
     }
@@ -50,7 +55,8 @@ class GigBoard extends Component {
                 <GigSearch handleSearchSubmit={this.handleSearchSubmit} 
                     handleChange={this.handleChange} 
                     gigCities={this.state.gigCities} 
-                    query={this.state.query}/>
+                    query={this.state.query}
+                    clearSearch={this.clearSearch}/>
                 <section className="gig-section">
                     {this.state.gigsArr.map(gig => {
                         const today = new Date(Date.now());

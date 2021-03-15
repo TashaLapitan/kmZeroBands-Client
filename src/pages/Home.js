@@ -7,8 +7,9 @@ import bandService from './../lib/bands-service';
 
 import PostNewGig from './../components/PostNewGig';
 import GigCard from './../components/GigCard';
-import BandCard from './../components/BandCard';
+import BandCard from '../components/BandCard';
 import BandSearch from './../components/BandSearch';
+
 
 class Home extends Component {
 
@@ -19,8 +20,7 @@ class Home extends Component {
     bandGenres: [],                      
     bandSearch: {
       city: "",
-      genre: "",                      
-      title: ""
+      genre: ""
     },
     bandsToDisplay: [],
     allBands: [],
@@ -72,39 +72,62 @@ class Home extends Component {
     bandService.getAllBands()
       .then(response => {
         let allBands = response.data;
-        if (allBands.length <= 5) {
-          this.setState({bandsToDisplay: allBands, allBands, searchBandRes: allBands})
-        } else {
-          const fiveRandomBands = allBands.slice(0,5);
-          console.log(fiveRandomBands)
-          this.setState({bandsToDisplay: fiveRandomBands, allBands, searchBandRes: allBands})
-          }
+        this.setState({bandsToDisplay: allBands, allBands, searchBandRes: allBands})
         }
       )}
 
-  filterBand = (name, str) => {
-    let newArr = [];
-    if (name === "city" || name === "title") {
-      let newArr = this.state.searchBandRes.filter(bandObj => bandObj[name].toLowerCase().includes(str.toLowerCase()));
-      this.setState({searchBandRes: newArr})
-    } else {
-      newArr = this.state.searchBandRes.filter(bandObj => (
-        bandObj.genres[0].toLowerCase().includes(str.toLowerCase()) 
-        || bandObj.genres[1].toLowerCase().includes(str.toLowerCase())
-        || bandObj.genres[2].toLowerCase().includes(str.toLowerCase()))
-      )
-      this.setState({searchBandRes: newArr})
-    }
+  filterByGenre = (genre, arr) => {
+    genre = genre.toLowerCase();
+    let results = [];
+    arr.forEach(bandObj => {
+      if (bandObj.genres[0].toLowerCase().includes(genre) 
+      || bandObj.genres[1].toLowerCase().includes(genre)
+      || bandObj.genres[2].toLowerCase().includes(genre)) {
+        results.push(bandObj)
+      }
+    })
+    return results;
+  }
+
+  filterByCity = (city) => {
+    city = city.toLowerCase();
+    let results = [];
+    this.state.allBands.forEach(bandObj => {
+      if (bandObj.city.toLowerCase().includes(city)) {
+        results.push(bandObj)
+      }
+    })
+    return results;
+  }
+
+  filterByCityAndGenre = (city, genre) => {
+    let results = this.filterByCity(city);
+    return this.filterByGenre(genre, results)
   }
 
   handleChange = (event) => {
     const {name, value} = event.target;
     this.setState({bandSearch: {...this.state.bandSearch, [name]: value}, showSearchResults: true});
-     if (this.state.bandSearch === {city: "", genre: "", title: ""}) {
+  }
+
+  handleSearchSubmit = (event) => {
+    event.preventDefault();
+    if (this.state.bandSearch === {city: "", genre: ""}) {
       this.setState({searchBandRes: this.state.allBands})
+    } else if (this.state.bandSearch.city === "") {
+      this.setState({searchBandRes: this.filterByGenre(this.state.bandSearch.genre, this.state.allBands)})
+    } else if (this.state.bandSearch.genre === "") {
+      this.setState({searchBandRes: this.filterByCity(this.state.bandSearch.city)})
     } else {
-      this.filterBand(name, this.state.bandSearch[name]);
+      this.setState({searchBandRes: this.filterByCityAndGenre(this.state.bandSearch.city, this.state.bandSearch.genre)})
     }
+  }
+
+  clearSearch = () => {
+    this.setState({bandSearch: {
+      city: "",
+      genre: ""
+    }})
   }
 
   componentDidMount () {
@@ -120,6 +143,7 @@ class Home extends Component {
            <section>
               <BandSearch handleChange={this.handleChange}
                   handleSearchSubmit={this.handleSearchSubmit}
+                  clearSearch={this.clearSearch}
                   bandSearch={this.state.bandSearch}
                   bandCities={this.state.bandCities}
                   bandGenres={this.state.bandGenres}
@@ -142,17 +166,13 @@ class Home extends Component {
             
            </section>
 
-          {this.props.isLoggedIn && this.state.showAddGig
+          {this.state.showAddGig
             ? <PostNewGig toggleAddGig={this.toggleAddGig} getGigs={this.getGigs}/>
-            : this.props.isLoggedIn && !this.state.showAddGig
-              ? <div className="post-gig-form">
-                  <h2>Publish your own gig and receive offers from your local musicians!</h2>
-                  <button className="yes-btn" onClick={this.toggleAddGig}>Post a gig</button>
-                </div>
-              :  <div className="post-gig-form">
-                    <h2>Publish your own gig and receive offers from your local musicians!</h2>
-                    <Link to='/login'><button className="yes-btn">Post a gig</button></Link>
-                  </div>}
+            : <div className="post-gig-form">
+                <h2>Publish your own gig and receive offers from your local musicians!</h2>
+                <button className="yes-btn" onClick={this.toggleAddGig}>Post a gig</button>
+              </div>}
+              
          </main>
          <section className="gig-section">
            {this.state.gigsArr.map((gig) => {

@@ -35,10 +35,15 @@ class GigCard extends Component {
     }
 
     getGigAuthor = () => {
-        userService.getUser(this.props.gig.clientID)
+        if (this.props.gig.clientID) {
+            userService.getUser(this.props.gig.clientID)
             .then((response) => {
                 this.setState({gigAuthor: response.data})
             })
+        } else {
+            this.setState({gigAuthor: "Guest User"})
+        }
+        
     }
 
     handleSubmit = (event) => {
